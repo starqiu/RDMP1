@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="RDMP1"
+  id="myeclipse.1393643621483"
+  context-root="/RDMP1"
+  j2ee-spec="6.0"
+  archive="RDMP1.war">
+  <attributes>
+    <attribute name="webrootdir" value="src/main/webapp" />
+  </attributes>
+</project-module>
+
