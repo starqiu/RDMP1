@@ -3,8 +3,10 @@ RDMP1
 
 Details:
 
-全称: The Data Mining Platform Integrated With R Language Under Big Data Environment(大数据环境下集成R语言的数据挖掘平台)
-架构：
+全称: 
+	The Data Mining Platform Integrated With R Language Under Big Data Environment
+	大数据环境下集成R语言的数据挖掘平台<br />
+架构：<br />
 	MVC框架：Spring
 	项目管理工具：Maven
 	版本管理工具：git
