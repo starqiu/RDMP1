@@ -8,7 +8,7 @@ Details:
 	MVC框架：Spring
 	项目管理工具：Maven
 	版本管理工具：git
-	开发语言：Java，R
+	开发语言：Java，R，
 	开发工具（IDE）：MyEclipse，Rstudio，
 	Web服务器：Tomcat7
 	相关jar包：Spring，Maven，JRI，JDK，Hadoop等
@@ -19,8 +19,3 @@ Details:
 		test ：测试用例目录
 		main： 代码目录
 		README.md 项目说明文件
-资料：
-	Spring相关学习资料：http://loveyou010.blog.51cto.com/all/4347735
-	git相关资料：http://blog.jobbole.com/53573/
-	在Cloudera Hadoop CDH上安装R及RHadoop（rhdfs、rmr2、rhbase、RHive）：
-		http://www.cnblogs.com/shudonghe/archive/2013/06/08/3126634.html

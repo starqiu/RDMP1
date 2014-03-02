@@ -19,5 +19,5 @@
 	<classpathentry kind="lib" path="/usr/local/hadoop/hadoop-ant-1.2.1.jar" sourcepath="/host/快盘/Java/hadoop-1.2.1/~hadoop-ant-1.2.1.jar"/>
 	<classpathentry kind="lib" path="/usr/local/hadoop/lib"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JRI_DIR"/>
-	<classpathentry kind="output" path="src/main/webapp/src/main/resources"/>
+	<classpathentry kind="output" path="src/main/webapp/src/main/java"/>
 </classpath>
