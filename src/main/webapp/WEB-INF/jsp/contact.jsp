@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>首页-集成R语言的数据挖掘平台</title>
+    <title>欢迎页-集成R语言的数据挖掘平台</title>
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/navbar-fixed-top.css" rel="stylesheet">
   </head>
@@ -22,9 +22,9 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">首页</a></li>
+            <li><a href="index.do">首页</a></li>
             <li><a href="about.do">关于</a></li>
-            <li><a href="contact.do">联系我们</a></li>
+            <li class="active"><a href="contact.do">联系我们</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">功能导航 <b class="caret"></b></a>
               <ul class="dropdown-menu">
@@ -38,24 +38,19 @@
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="login.do">登录</a></li>
-            <li><a href="register.do">注册</a></li>
+            <li class="active"><a href="userInfo.do">${sessionScope.userName}</a></li>
+            <li><a href="loginOut.do">注销</a></li>
           </ul>
         </div>
       </div>
     </div>
 
     <div class="container">
-
       <div class="jumbotron">
-        <h1>Navbar example</h1>
-        <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-        <p>To see the difference between static and fixed top navbars, just scroll.</p>
-        <p>
-          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
-        </p>
+      	所属：中国科学技术大学<br />
+      	地址：江苏省苏州市吴中区仁爱路166号<br />
       </div>
-
+    </div>
     <script src='js/jquery-1.11.0.min.js'></script>
 	<script src="js/bootstrap.min.js"></script>
   </body>
