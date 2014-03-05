@@ -7,6 +7,7 @@
     <title>首页-集成R语言的数据挖掘平台</title>
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/navbar-fixed-top.css" rel="stylesheet">
+    <link href="css/sticky-footer.css" rel="stylesheet">
   </head>
   <body>
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -55,7 +56,12 @@
           <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
         </p>
       </div>
-
+    </div>
+	<div id="footer">
+      <div class="container">
+        <p class="text-muted">中国科学技术大学版权所有.<br /> Copyright (c) 2006 China Payment and Remittance Service Co.,Ltd. All rights reserved.</p>
+      </div>
+    </div>
     <script src='js/jquery-1.11.0.min.js'></script>
 	<script src="js/bootstrap.min.js"></script>
   </body>

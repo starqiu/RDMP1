@@ -14,6 +14,8 @@ package ustc.sse.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,7 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ustc.sse.rjava.RJavaInterface;
 
 /**
- * 实现功能： 输入控制器
+ * 实现功能： 数据挖掘控制器
  * <p>
  * date	    author            email		           notes<br />
  * --------	---------------------------	---------------<br />
@@ -29,15 +31,21 @@ import ustc.sse.rjava.RJavaInterface;
  *
  */
 @Controller
-public class InputController extends RJavaInterface{
+public class DataMiningController extends RJavaInterface{
+	private Log log = LogFactory.getLog(DataMiningController.class);
 	
-	public InputController(){
+	public DataMiningController(){
 		super();
 	}
 	
-	@RequestMapping("/selectFile.do")
-	public ModelAndView selectFile(HttpServletRequest request,HttpServletResponse response){
-		return new ModelAndView("inputOthers");
+	@RequestMapping("mapred.do")
+	public ModelAndView mapred(HttpServletRequest request,HttpServletResponse response){
+		callRJava();
+		String cmd = "source('../r/WordCount.R')";
+        String rv = re.eval(cmd).asString();
+        log.info("the result of source WordCount.R is:"+rv);
+        
+		return new ModelAndView("result","mapRedRst",rv);
 	}
 
 }

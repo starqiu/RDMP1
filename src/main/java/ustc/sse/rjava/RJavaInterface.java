@@ -18,12 +18,11 @@ import java.io.InputStreamReader;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.commons.logging.impl.Log4JLogger;
 import org.rosuda.JRI.RMainLoopCallbacks;
 import org.rosuda.JRI.Rengine;
 
 /**
- * 实现功能： R与Java的接口<br />
+ * 实现功能： R与Java的接口,提供Rengine对象<br />
  * <p>
  * date	    author            email		           notes<br />
  * --------	---------------------------	---------------<br />
@@ -44,7 +43,6 @@ public  class RJavaInterface implements RMainLoopCallbacks{
         if (!re.waitForR()) {
         	log.error("Can not load R!");
         }
-        
         /*String path = re.jriChooseFile(0);
         String cmd = "source('"+path+"')";
         String rv = re.eval(cmd).asString();
@@ -60,29 +58,17 @@ public  class RJavaInterface implements RMainLoopCallbacks{
     }
 
 	public String rReadConsole(Rengine re, String prompt, int addToHistory) {
-		System.out.print(prompt);
+		log.info(prompt);
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(
 					System.in));
 			String s = br.readLine();
 			return (s == null || s.length() == 0) ? s : s + "\n";
 		} catch (Exception e) {
-			System.out.println("jriReadConsole exception: " + e.getMessage());
+			log.info("jriReadConsole exception: " + e.getMessage());
 		}
 		return null;
 	}
-
-	public void rWriteConsole(Rengine re, String text, int oType) {
-		System.out.print(text);
-	}
-	
-	public void rBusy(Rengine re, int which) {
-		System.out.println("rBusy(" + which + ")");
-	}
-	
-	/* 
-	 * @see org.rosuda.JRI.RMainLoopCallbacks#rChooseFile(org.rosuda.JRI.Rengine, int)
-	 */
 	public String rChooseFile(Rengine re, int newFile) {
 		FileDialog fd = new FileDialog(new Frame(),
 				(newFile == 0) ? "Select a file" : "Select a new file",
@@ -96,28 +82,23 @@ public  class RJavaInterface implements RMainLoopCallbacks{
 			return res;
 	}
 	
-	public void rShowMessage(Rengine re, String message) {
-		System.out.println("rShowMessage \"" + message + "\"");
+	public void rWriteConsole(Rengine re, String text, int oType) {
+		log.info(text);
 	}
-
-	/* 
-	 * @see org.rosuda.JRI.RMainLoopCallbacks#rFlushConsole(org.rosuda.JRI.Rengine)
-	 */
+	
+	public void rBusy(Rengine re, int which) {
+		log.info("rBusy(" + which + ")\n");
+	}
+	
+	public void rShowMessage(Rengine re, String message) {
+		log.info("rShowMessage(" + message + ")\n");
+	}
+	
 	public void rFlushConsole(Rengine re) {
 	}
-
-	/* 
-	 * @see org.rosuda.JRI.RMainLoopCallbacks#rSaveHistory(org.rosuda.JRI.Rengine, java.lang.String)
-	 */
 	public void rSaveHistory(Rengine re, String filename) {
 	}
-
-	/* 
-	 * @see org.rosuda.JRI.RMainLoopCallbacks#rLoadHistory(org.rosuda.JRI.Rengine, java.lang.String)
-	 */
 	public void rLoadHistory(Rengine re, String filename) {
-		
 	}
-
 }
 

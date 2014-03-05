@@ -6,7 +6,7 @@ library('rhdfs')
 hdfs.init()
 library('rmr2')  
 input<- '/tmp/wordcount/wordcount.txt'
-output<- '/tmp/wordcount/out6'
+output<- '/tmp/wordcount/out7'
 wordcount = function(input, output = NULL, pattern = " "){
 	
 	wc.map = function(., lines) {

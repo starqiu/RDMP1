@@ -7,6 +7,7 @@
     <title>欢迎页-集成R语言的数据挖掘平台</title>
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/navbar-fixed-top.css" rel="stylesheet">
+    <link href="css/sticky-footer.css" rel="stylesheet">
   </head>
   <body>
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -22,7 +23,7 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.do">首页</a></li>
+            <li><a href="index.do">首页</a></li>
             <li><a href="about.do">关于</a></li>
             <li><a href="contact.do">联系我们</a></li>
             <li class="dropdown">
@@ -46,8 +47,14 @@
     </div>
 
     <div class="container">
-      <div class="jumbotron">
-      	To be filled!
+     	<form action="mapred.do" method="post">
+     		<input type="file" name="fileName"  />
+     		<input type="submit" name="sb" value="提交">
+     	</form>
+    </div>
+    <div id="footer">
+      <div class="container">
+        <p class="text-muted">中国科学技术大学版权所有. <br />Copyright (c) 2006 China Payment and Remittance Service Co.,Ltd. All rights reserved.</p>
       </div>
     </div>
     <script src='js/jquery-1.11.0.min.js'></script>

@@ -21,6 +21,9 @@ RDMP1
 		pom.xml ：maven 管理文件，通过这个文件来更新项目依赖（jar包）<br />
 		test ：测试用例目录<br />
 		main： 代码目录<br />
+		ustc.sse.controller 放置控制层代码<br />
+		ustc.sse.r 放置R脚本代码<br />
+		ustc.sse.rjava 放置R与Java连通的代码<br />
 		README.md 项目说明文件<br />
 <h1>资料：</h1><br />
 	Spring相关学习资料：http://loveyou010.blog.51cto.com/all/4347735<br />

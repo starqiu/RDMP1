@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>欢迎页-集成R语言的数据挖掘平台</title>
+    <title>首页-集成R语言的数据挖掘平台</title>
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/navbar-fixed-top.css" rel="stylesheet">
     <link href="css/sticky-footer.css" rel="stylesheet">
@@ -23,9 +23,9 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="index.do">首页</a></li>
+            <li><a href="#">首页</a></li>
             <li><a href="about.do">关于</a></li>
-            <li class="active"><a href="contact.do">联系我们</a></li>
+            <li><a href="contact.do">联系我们</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">功能导航 <b class="caret"></b></a>
               <ul class="dropdown-menu">
@@ -40,7 +40,7 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="active"><a href="userInfo.do">${sessionScope.userName}</a></li>
-            <li><a href="loginOut.do">注销</a></li>
+            <li><a href="register.do">注册</a></li>
           </ul>
         </div>
       </div>
@@ -48,13 +48,12 @@
 
     <div class="container">
       <div class="jumbotron">
-      	所属：中国科学技术大学<br />
-      	地址：江苏省苏州市吴中区仁爱路166号<br />
+      	${mapredRst }
       </div>
     </div>
-    <div id="footer">
+	<div id="footer">
       <div class="container">
-        <p class="text-muted">中国科学技术大学版权所有. <br />Copyright (c) 2006 China Payment and Remittance Service Co.,Ltd. All rights reserved.</p>
+        <p class="text-muted">中国科学技术大学版权所有.<br /> Copyright (c) 2006 China Payment and Remittance Service Co.,Ltd. All rights reserved.</p>
       </div>
     </div>
     <script src='js/jquery-1.11.0.min.js'></script>
