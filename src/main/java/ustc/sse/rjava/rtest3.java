@@ -56,9 +56,8 @@ public class rtest3 implements RMainLoopCallbacks{
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		System.out.println("JLP =" + System.getProperty("java.library.path")); 
-		/*rtest3 rtest3 = new rtest3();
-		rtest3.callRJava();*/
+		rtest3 rtest3 = new rtest3();
+		rtest3.callRJava();
 	}
 
 	public void rWriteConsole(Rengine re, String text, int oType) {

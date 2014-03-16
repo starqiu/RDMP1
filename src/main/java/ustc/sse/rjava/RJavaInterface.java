@@ -33,10 +33,10 @@ public  class RJavaInterface implements RMainLoopCallbacks{
 	
 	private Log log = LogFactory.getLog(RJavaInterface.class);
 	public Rengine re ;
+	//= new Rengine(new String[] { "--vanilla" }, false, new RJavaInterface());
 
 	public RJavaInterface() {
 		super();
-		re = new Rengine(new String[] { "--vanilla" }, false, new RJavaInterface());
 	}
 	
 	public void callRJava() {

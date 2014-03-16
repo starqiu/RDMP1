@@ -9,7 +9,7 @@
 #library(DMwR)
 #setwd(choose.dir())
 #setwd(dir.choose()) 
-algae <- read.table('src/ustc/sse/data/ch2/Analysis.txt',
+algae <- read.table('src/main/java/ustc/sse/data/ch2/Analysis.txt',
           header=F,
           dec='.',
           col.names=c('season','size','speed','mxPH','mnO2','Cl',

@@ -25,13 +25,31 @@
 	made subject to such option by the copyright holder. -->
 
 <web-app xmlns:javaee="http://java.sun.com/xml/ns/javaee"
-	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_1.xsd">
 	<javaee:display-name>
 		Integrited with R of Data Mining Plat
 	</javaee:display-name>
 	<welcome-file-list>
-	    <welcome-file>index.jsp</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
+
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>WEB-INF/classes/log4j.properties</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+	
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath:applicationContext*.xml
+		</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
 	
 	<servlet>
 		<servlet-name>Dispatcher</servlet-name>
@@ -48,7 +66,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Dispatcher</servlet-name>
-		<url-pattern>*.do</url-pattern>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	
+
 </web-app>
