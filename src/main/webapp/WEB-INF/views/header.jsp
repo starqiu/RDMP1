@@ -15,5 +15,22 @@
 	rel="stylesheet">
 <link href="<c:url value="/resources/css/sticky-footer.css" />"
 	rel="stylesheet">
+
+
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/font-awesome.min.css"  /> " />
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/fullcalendar.css" /> " />
+<link rel="stylesheet"
+	href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
+<link rel="stylesheet" href="<c:url value="/resources/css/ace.min.css" /> " />
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/ace-rtl.min.css" /> " />
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/ace-skins.min.css" /> " />
+<script src="<c:url value="/resources/js/ace-extra.min.js" />"></script>
+
 </head>
 <body>
+</body>
+</html>
