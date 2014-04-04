@@ -2,31 +2,79 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc
 	http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd	
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context-3.1.xsd
+	http://www.springframework.org/schema/tx  
+    http://www.springframework.org/schema/tx/spring-tx-3.1.xsd  
+	http://www.springframework.org/schema/aop  
+    http://www.springframework.org/schema/aop/spring-aop-3.1.xsd  
     http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
-	
-	<import resource="i18n.xml"/>
-	
+
+	<import resource="i18n.xml" />
+
 	<mvc:resources location="/WEB-INF/" mapping="/resources/**" />
 	<mvc:annotation-driven />
-	
-	<context:component-scan base-package="ustc.sse.controller">
+
+	<context:component-scan base-package="ustc.sse">
 	</context:component-scan>
-	
-	<bean class="org.springframework.web.servlet.view.tiles2.TilesViewResolver">
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp" />
+		<property name="suffix" value=".jsp" />
 	</bean>
-	<bean class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
-		<property name="definitions">
-			<list>
-				<value>/WEB-INF/views/**/views.xml</value>
-			</list>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver">
 		</property>
+		<property name="url" value="jdbc:mysql://localhost:3306/tmailcontest">
+		</property>
+		<property name="username" value="root"></property>
+		<property name="password" value="xing"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>ustc/sse/jdbc/TmailFirstseason.hbm.xml</value></list>
+		</property></bean>
+	<!-- 从这开始就是开启事务的配置了 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+	<aop:config>
+		<!-- 在这里，我将事务控制在service层，如果你想改，就改底下那个括号里的包名什么的吧 -->
+		<aop:pointcut id="personDaoPC" expression="execution(* ustc.sse.service.impl.*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="personDaoPC" />
+	</aop:config>
+
+	<!-- 这个是我为了调试代码创建的一个dao -->
+	<bean id="userDao" class="ustc.sse.dao.impl.UserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
 </beans>

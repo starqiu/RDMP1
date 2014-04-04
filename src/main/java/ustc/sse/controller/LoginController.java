@@ -11,6 +11,9 @@
  */
 package ustc.sse.controller;
 
+import java.util.List;
+
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,6 +21,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import ustc.sse.jdbc.User;
+import ustc.sse.service.UserService;
 
 /**
  * 实现功能： 登录
@@ -31,6 +37,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LoginController {
 	private final static Log log = LogFactory.getLog(LoginController.class);
 	private String userName;
+	@Resource
+	private UserService userService;
 	
 	public LoginController() {
 		super();
@@ -44,8 +52,13 @@ public class LoginController {
 	@RequestMapping({"/","/index"})
 	public String index(HttpServletRequest request,HttpServletResponse response){
 		log.info("go to index page!");
+		List<User> list=this.userService.findAll();
+		for(User u:list){
+			System.out.println(u.getName()+","+u.getEmail());
+		}
+		
 		return "index";
 	}
-
+	
 }
 
