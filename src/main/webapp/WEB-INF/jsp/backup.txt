@@ -1,0 +1,71 @@
+<div id="nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	  <ul class="nav navbar-nav">
+		  <li><span class="navbar-brand">大数据挖掘平台</span></li>
+		  <li class="active"><a href="index">首页</a></li>
+		  <li><a href="about">关于</a></li>
+		  <li><a href="contact">联系我们</a></li>
+		  <li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">更多<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li><a href="help">帮助</a></li>
+			</ul>
+	      </li>
+	  </ul>
+	  <ul class="nav navbar-nav navbar-right">
+          <li class="active"><a href="login.do">登录</a></li>
+          <li><a href="register.do">注册</a></li>
+	      <li class="light-blue"><a data-toggle="dropdown" href="#"
+							class="dropdown-toggle"> <span class="user-info"> <small>欢迎光临,</small>
+									StarQiu!</span> <i class="icon-caret-down"></i> </a>
+				<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+					<li><a href="#"> <i class="icon-cog"></i> 设置 </a></li>
+					<li><a href="#"> <i class="icon-user"></i> 个人资料 </a></li>
+					<li class="divider"></li>
+					<li><a href="#"> <i class="icon-off"></i> 退出 </a></li>
+				</ul>
+			</li>
+      </ul>
+	</div>
+	<div id="content" >
+		<div class="container">
+			<div class="row-fluid">
+				<div class='span9 main'>
+					<h2>content</h2>
+				</div>
+				<div class='span3 sidebar'>
+					<h2>sider</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="footer">
+		<div class="container">
+			<p class="text-muted">
+			中国科学技术大学版权所有. Copyright (c) 2006 China Payment and Remittance
+			Service Co.,Ltd. All rights reserved.
+			</p>
+			
+		</div>
+	</div>
+	body {
+  padding-top: 70px;
+
+  
+  <div class='navbar navbar-inverse'>
+		<div class='nav-collapse' style="height: auto;">
+			<tiles:insertAttribute name="top" />
+		</div>
+	</div>
+	<div id='content' class='row-fluid'>
+		<div class='span3 sidebar'>
+			<tiles:insertAttribute name="sider" />
+		</div>
+		<div class='span9 main'>
+			<tiles:insertAttribute name="content" />
+		</div>
+	</div>
+	<div id="footer">
+		<div class="container">
+			<tiles:insertAttribute name="footer" />
+		</div>
+	</div>

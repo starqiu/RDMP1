@@ -11,9 +11,10 @@
  */
 package ustc.sse.dao;
 
-import ustc.sse.jdbc.User;
-
 import java.util.List;
+
+import ustc.sse.model.User;
+
 
 /**
  * 实现功能：
@@ -25,9 +26,7 @@ import java.util.List;
  * 
  */
 public interface UserDao {
-
-	public List<User> findAll();
-
-	public void modify(User user);
-
+	
+	List<User> selectAllUsers();
+	User selectUserByName(String userName);
 }

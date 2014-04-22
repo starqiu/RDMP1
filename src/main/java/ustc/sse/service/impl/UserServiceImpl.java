@@ -26,7 +26,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import ustc.sse.dao.UserDao;
-import ustc.sse.jdbc.User;
+import ustc.sse.model.User;
 import ustc.sse.service.UserService;
 
 /**
@@ -39,14 +39,16 @@ public class UserServiceImpl implements UserService {
 
 	@Resource
 	private UserDao userDao;
+
+	@Override
+	public List<User> selectAllUsers() {
+		return this.userDao.selectAllUsers();
+	}
+
+	@Override
+	public User selectUserByName(String userName) {
+		return this.userDao.selectUserByName(userName);
+	}
 	
-	public List<User> findAll() {
-		return this.userDao.findAll();
-	}
-
-	public void modify(User user) {
-		this.userDao.modify(user);
-	}
-
 }
 

@@ -12,9 +12,11 @@
 package ustc.sse.dao.impl;
 
 import java.util.List;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+
 import ustc.sse.dao.UserDao;
-import ustc.sse.jdbc.User;
+import ustc.sse.model.User;
 
 /**
  * 实现功能： 
@@ -31,15 +33,16 @@ import ustc.sse.jdbc.User;
  * @author 百木森森
  * 
  */
-public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
+public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao {
 
-	public List<User> findAll() {
-		// 这里的getSession()方法是继承自父类的方法
-		return this.getSession().createQuery("from User").list();
+	@Override
+	public List<User> selectAllUsers() {
+		return this.getSqlSession().selectList("user.selectAllUsers");
 	}
 
-	public void modify(User user) {
-		this.getSession().update(user);
+	@Override
+	public User selectUserByName(String userName) {
+		return this.getSqlSession().selectOne("user.selectUserByName",userName);
 	}
 
 }

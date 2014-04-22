@@ -19,18 +19,35 @@
 
 	<import resource="i18n.xml" />
 
-	<mvc:resources location="/WEB-INF/" mapping="/resources/**" />
+	<mvc:resources location="/resources/" mapping="/resources/**" />
+	<mvc:resources location="/fonts/" mapping="/fonts/**" />
+	<!-- 添加注解驱动 -->
 	<mvc:annotation-driven />
-
+	<!-- 扫描ustc.sse这个包里的所有类，把里面配上相应注解的类全都放在容器中进行管理 --> 
 	<context:component-scan base-package="ustc.sse">
 	</context:component-scan>
-
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/jsp" />
+	<!-- 定义跳转的文件的前后缀
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
+	</bean>--> 
+	<bean id="viewResolver"
+	    class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+	    <property name="viewClass">
+	        <value>
+	            org.springframework.web.servlet.view.tiles2.TilesView
+	        </value>
+	    </property>
 	</bean>
-
+	<bean id="tilesConfigurer"
+	    class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+	    <property name="definitions">
+	        <list>
+	            <value>/WEB-INF/views.xml</value>
+	        </list>
+	    </property>
+	</bean>
+	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver">
 		</property>
@@ -39,42 +56,20 @@
 		<property name="username" value="root"></property>
 		<property name="password" value="xing"></property>
 	</bean>
-	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-		<property name="dataSource">
-			<ref bean="dataSource" />
-		</property>
-		<property name="hibernateProperties">
-			<props>
-				<prop key="hibernate.dialect">
-					org.hibernate.dialect.MySQLDialect
-				</prop>
-				<prop key="hibernate.hbm2ddl.auto">update</prop>
-			</props>
-		</property>
-		<property name="mappingResources">
-			<list>
-				<value>ustc/sse/jdbc/TmailFirstseason.hbm.xml</value></list>
-		</property></bean>
-	<!-- 从这开始就是开启事务的配置了 -->
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	<tx:advice id="txAdvice" transaction-manager="transactionManager">
-		<tx:attributes>
-			<tx:method name="*" propagation="REQUIRED" />
-		</tx:attributes>
-	</tx:advice>
-	<aop:config>
-		<!-- 在这里，我将事务控制在service层，如果你想改，就改底下那个括号里的包名什么的吧 -->
-		<aop:pointcut id="personDaoPC" expression="execution(* ustc.sse.service.impl.*.*(..))" />
-		<aop:advisor advice-ref="txAdvice" pointcut-ref="personDaoPC" />
-	</aop:config>
-
-	<!-- 这个是我为了调试代码创建的一个dao -->
-	<bean id="userDao" class="ustc.sse.dao.impl.UserDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-
+	
+	<!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->    
+    <bean id="transactionManager"    
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">    
+        <property name="dataSource" ref="dataSource" />    
+    </bean>  
+      
+    <!-- 创建SqlSessionFactory，同时指定数据源 -->    
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">    
+        <property name="configLocation" value="classpath:mybatis-config.xml"></property>  
+        <property name="dataSource" ref="dataSource" />    
+    </bean>  
+ 
+    <bean id="userDao" class="ustc.sse.dao.impl.UserDaoImpl">  
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>  
+    </bean>  
 </beans>

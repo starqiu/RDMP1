@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta charset="utf-8">
+        <title>Bootply - The Bootstrap Playground</title>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="A free editor and builder for Twitter Bootstrap that also includes Bootstrap snippets, templates and examples using Javascript, CSS, HTML5 and jQuery.">
+        <meta name="keywords" content="Bootstrap editor, Bootstrap, Twitter Bootstrap, Bootstrap 3, fiddle, free, editor, mockup, snippets, JavaScript, CSS, HTML5">
+        <meta name="og:site_name" content="Bootply" />
+        <meta name="og:title" content="Bootstrap Playground - Bootply - The Bootstrap Playground" />
+        <meta name="og:description" content="A Twitter Bootstrap editor with Bootstrap examples. Design, test, customize and find Bootstrap HTML, JavaScript and CSS." /> 
+        <meta property="og:image" content="/assets/bp_logo.jpg"/>
+        <meta name="google-site-verification" content="MIaHKEqspbaoI62kQsOLavc6RdqMZtpkmoYNrpqzhqs" />
+        <script src="/codemirror/lib/codemirror.js"></script>
+        <link rel="stylesheet" href="/codemirror/lib/codemirror.css">
+        <script src="/codemirror/mode/css/css.js"></script>
+        <script src="/codemirror/mode/javascript/javascript.js"></script>
+        <script src="/codemirror/mode/xml/xml.js"></script>
+        <script src="/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+        <link href="//code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" type="text/css" rel="stylesheet" media="all">
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" >
+        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet" >
+        <!--[if lt IE 9]>
+          <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link rel="shortcut icon" href="/bootply_ico.jpg">
+        <link rel="apple-touch-icon" href="/bootply_ico.jpg">
+        
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="/plugins/jquery.layout.js"></script>
+        
+        <link href="/plugins/jquery.layout.css" rel="stylesheet">
+        <link rel="stylesheet" href="/plugins/bootstrap-select.min.css">
+        <link rel="stylesheet" href="/css/bootply.css">
+        
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=482723745132387";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+        
+    </head>
+    <body itemscope itemtype="http://schema.org/WebApplication">
+        <h1 itemprop="name" style="display:none;">Bootply</h1>
+        <meta itemprop="about" content="Bootstrap Editor, Snippets and Playground" />
+        <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a href="http://bootply.com/" class="brand" title="Twitter Bootstrap editor, templates and snippets.">
+                    Bootply
+                </a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav nav-pills hidden-phone hidden-tablet">
+                    
+                        <li class="divider">&nbsp; &nbsp;</li>
+                        <!--<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>-->
+                        <!--<li class="tw-btn hidden-phone hidden-tablet" style="display:none"><a href="https://twitter.com/Bootply" class="twitter-follow-button" data-show-count="false" data-lang="en">Follow @Bootply</a> &nbsp; &nbsp; </li>-->
+                        <li class="fb-like hidden-phone hidden-tablet" data-href="http://bootply.com" data-send="false" data-layout="button_count" data-width="80" data-show-faces="false" data-font="arial"></li>
+                    </ul>
+                    <ul class="nav nav-pills pull-right">
+                        <li><form class="input-append" method="GET" action="/search" style="margin-top:4px;margin-bottom:5px;"><input type="text" title="Enter keyword(s) to find" id="kw" name="kw" class="span2"><button type="submit" class="btn"><i class="icon-search" title="Search"></i></button></form>&nbsp;&nbsp;</li>
+                        <li class="dropdown " id="menuLogin">
+                            <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">Login</a>
+                            <div class="dropdown-menu" style="padding:17px;">
+                                <form id="formLogin" class="form"> 
+                                    <label>Login</label> 
+                                    <input name="_csrf" id="token" type="hidden" value="sS0m8q6br0Nnf6pJMHfJw6NoIE2guJ+Wun3Bo=">
+    							    <input name="username" id="username" type="text" placeholder="Username" pattern="^[a-z,A-Z,0-9,_]{6,15}$" data-valid-min="6" title="Enter your username" required="">
+    							    <input name="password" id="password" type="password" placeholder="Password" title="Enter your password" required=""><br>
+    							    <button type="button" id="btnLogin" class="btn">Login</button>
+    							</form>
+                                <form><a href="#" title="Fast and free sign up!" id="btnNewUser" data-toggle="collapse" data-target="#formRegister">New User? Sign-up..</a></form>
+                                <form id="formRegister" class="form collapse">
+                                    <input name="_csrf" id="token" type="hidden" value="sS0m8q6br0Nnf6pJMHfJw6NoIE2guJ+Wun3Bo=">
+                                    <input name="email" id="inputEmail" type="email" placeholder="Email" required="">
+        						    <input name="username" id="inputUsername" type="text" placeholder="Username" pattern="^[a-z,A-Z,0-9,_]{6,15}$" data-valid-min="6" title="Choose a username" required=""><br>
+    							    <input name="password" id="inputpassword" type="password" placeholder="Password" required=""> 
+                                    <input name="verify" id="inputVerify" type="password" placeholder="Password (again)" required=""><br>                                  
+    							    <button type="button" id="btnRegister" class="btn">Sign Up</button>
+    							</form>
+                                <a data-toggle="modal" role="button" href="#forgotPasswordModal">Forgot username or password?</a>
+                                <a data-toggle="modal" role="button" href="#contactModal"><small>Need help? Contact us</small></a>
+                            </div>
+                        </li>
+                        <li class="dropdown hide" id="menuUser">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="See your Bootply collection and profile">
+                                <i class='icon-user icon-xxlarge'> </i> <span id="lblUsername"></span>
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/user">Dashboard</a></li>
+                                <li><a href="/new">Create New Bootply</a></li>
+                                
+                                <li><a href="/logout">Logout</a></li>
+                                <li class="divider"> </li>
+                                <li><a href="/bootstrap-community">Community</a></li>
+                                <li><a href="/about">About</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div style="height:48px;" id="spacer">
+        
+        </div>
+        <div id="wrap">
+            
+<div class="container">
+    <h1>404 Not Found</h1>
+    <p class="lead">
+    <strong>Oh, foo-ey.</strong> This server does <i>not</i> have a resource at '/bootstrap/img/favicon.ico'.
+    </p>
+    You're a daring one - traveling to such an unchartered destination. Know that you're not alone.
+    Your S.O.S report has been sent to the snow patrol at Bootply.
+    </br>
+    </br>
+    Remember, <a href="/" title="These mountains will be as cold and lonely tonight as they were 300 years ago.">do not ply alone</a>.
+</div>
+            <div id="push"></div>
+        </div>
+        <footer id="footer">
+            <div class="row-fluid">
+                <div class="span4">
+                    <p> 
+                        <a href="http://twitter.com/Bootply" rel="nofollow" title="Bootply on Twitter" target="ext">Twitter</a><br>
+                        <a href="https://plus.google.com/+Bootply" rel="publisher">Google+</a><br>
+                        <a href="http://facebook.com/Bootply" rel="nofollow" title="Bootply on Facebook" target="ext">Facebook</a><br>
+                        <a href="https://github.com/iatek/bootply" title="Bootply on GitHub" target="ext">GitHub</a><br>
+                        <a href="http://www.bootstrapzero.com" title="Free Bootstrap templates" target="ext">BootstrapZero</a><br>
+                    </p>
+                </div>
+                <div class="span4">
+                    <p> 
+                        <a data-toggle="modal" role="button" href="#contactModal">Contact Us</a><br>
+                        <a href="/tags">Tags</a><br>
+                        <a href="/bootstrap-community">Community</a><br>
+                        <a href="/users">Members</a><br>
+                        <a href="/upgrade">Upgrade</a><br>
+                    </p>
+                </div>
+                <div class="span4">
+                    <span class="pull-right">&copy;Copyright 2013 <a href="/" title="The Bootstrap Playground">Bootply</a> | <a href="/about#privacy">Privacy</a></span>
+                </div>
+            </div>
+        </footer>
+        
+        <script src="/plugins/bootstrap-select.min.js"></script>
+        <script src="/codemirror/jquery.codemirror.js"></script>
+        <script src="/beautifier.js"></script>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-40413119-1', 'bootply.com');
+          ga('send', 'pageview');
+        </script>
+        <script>
+        jQuery.fn.shake = function(intShakes, intDistance, intDuration, foreColor) {
+            this.each(function() {
+                if (foreColor && foreColor!="null") {
+                    $(this).css("color",foreColor); 
+                }
+                $(this).css("position","relative"); 
+                for (var x=1; x<=intShakes; x++) {
+                $(this).animate({left:(intDistance*-1)}, (((intDuration/intShakes)/4)))
+                .animate({left:intDistance}, ((intDuration/intShakes)/2))
+                .animate({left:0}, (((intDuration/intShakes)/4)));
+                $(this).css("color",""); 
+            }
+          });
+        return this;
+        };
+        </script>
+        <script>
+        $(document).ready(function() {
+        
+            $('.tw-btn').fadeIn(3000);
+            $('.alert').delay(3000).fadeOut(1500);
+            
+            $('#btnLogin').click(function(){
+                $(this).text("...");
+                $.ajax({
+                    url: "/loginajax",
+                    type: "post",
+                    data: $('#formLogin').serialize(),
+                    success: function (data) {
+                        //console.log('data:'+data);
+                        if (data.status==1&&data.user) { //logged in
+                            $('#menuLogin').hide();
+                            $('#lblUsername').text(data.user.username);
+                            $('#menuUser').show();
+                            /*
+                            $('#completeLoginModal').modal('show');
+                            $('#btnYes').click(function() {
+                                window.location.href="/";
+                            });
+                            */
+                        }
+                        else {
+                            $('#btnLogin').text("Login");
+                            prependAlert("#spacer",data.error);
+                            $('#btnLogin').shake(4,6,700,'#CC2222');
+                            $('#username').focus();
+                        }
+                    },
+                    error: function (e) {
+                        $('#btnLogin').text("Login");
+                        console.log('error:'+JSON.stringify(e));
+                    }
+                });
+            });
+            $('#btnRegister').click(function(){
+                $(this).text("Wait..");
+                $.ajax({
+                    url: "/signup?format=json",
+                    type: "post",
+                    data: $('#formRegister').serialize(),
+                    success: function (data) {
+                        console.log('data:'+JSON.stringify(data));
+                        if (data.status==1) {
+                            $('#btnRegister').attr("disabled","disabled");
+                            $('#formRegister').text('Thanks. You can now login using the Login form.');
+                        }
+                        else {
+                            prependAlert("#spacer",data.error);
+                            $('#btnRegister').shake(4,6,700,'#CC2222');
+                            $('#btnRegister').text("Sign Up");
+                            $('#inputEmail').focus();
+                        }
+                    },
+                    error: function (e) {
+                        $('#btnRegister').text("Sign Up");
+                        console.log('error:'+e);
+                    }
+                });
+            });
+            
+            $('.loginFirst').click(function(){
+                $('#navLogin').trigger('click');
+                return false;
+            });
+            
+            $('#btnForgotPassword').on('click',function(){
+                $.ajax({
+                    url: "/resetPassword",
+                    type: "post",
+                    data: $('#formForgotPassword').serializeObject(),
+                    success: function (data) {
+                        if (data.status==1){
+                            prependAlert("#spacer",data.msg);
+                            return true;
+                        }
+                        else {
+                            prependAlert("#spacer","Your password could not be reset.");
+                            return false;
+                        }
+                    },
+                    error: function (e) {
+                        console.log('error:'+e);
+                    }
+                });
+            });
+            
+            $('#btnContact').click(function(){
+                
+                $.ajax({
+                    url: "/contact",
+                    type: "post",
+                    data: $('#formContact').serializeObject(),
+                    success: function (data) {
+                        if (data.status==1){
+                            prependAlert("#spacer","Thanks. We got your message.");
+                             $('#contactModal').modal('hide');
+                            return true;
+                        }
+                        else {
+                            prependAlert("#spacer",data.error);
+                            return false;
+                        }
+                    },
+                    error: function (e) {
+                        console.log('error:'+e);
+                    }
+                });
+                return false;
+            });
+            
+            /*
+            $('.nav .dropdown-menu input').on('click touchstart',function(e) {
+                e.stopPropagation();
+            });
+            */
+            
+            
+            
+            
+            
+        });
+        $.fn.serializeObject = function()
+        {
+            var o = {};
+            var a = this.serializeArray();
+            $.each(a, function() {
+                if (o[this.name] !== undefined) {
+                    if (!o[this.name].push) {
+                        o[this.name] = [o[this.name]];
+                    }
+                    o[this.name].push(this.value || '');
+                } else {
+                    o[this.name] = this.value || '';
+                }
+            });
+            return o;
+        };
+        var prependAlert = function(appendSelector,msg){
+            $(appendSelector).after('<div class="alert alert-info alert-block affix" id="msgBox" style="z-index:1300;margin:14px!important;">'+msg+'</div>');
+            $('.alert').delay(3500).fadeOut(1000);
+        }
+        </script>
+        <!-- Quantcast Tag -->
+        <script type="text/javascript">
+        var _qevents = _qevents || [];
+        
+        (function() {
+        var elem = document.createElement('script');
+        elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+        elem.async = true;
+        elem.type = "text/javascript";
+        var scpt = document.getElementsByTagName('script')[0];
+        scpt.parentNode.insertBefore(elem, scpt);
+        })();
+        
+        _qevents.push({
+        qacct:"p-0cXb7ATGU9nz5"
+        });
+        </script>
+        <noscript>
+        <div style="display:none;">
+        <img src="//pixel.quantserve.com/pixel/p-0cXb7ATGU9nz5.gif" border="0" height="1" width="1" alt="Quantcast"/>
+        </div>
+        </noscript>
+        <!-- End Quantcast tag -->
+        <div id="completeLoginModal" class="modal hide">
+            <div class="modal-header">
+                <a href="#" data-dismiss="modal" aria-hidden="true" class="close">×</a>
+                 <h3>Do you want to proceed?</h3>
+            </div>
+            <div class="modal-body">
+                <p>This page must be refreshed to complete your login.</p>
+                <p>You will lose any unsaved work once the page is refreshed.</p>
+                <br><br>
+                <p>Click "No" to cancel the login process.</p>
+                <p>Click "Yes" to continue...</p>
+            </div>
+            <div class="modal-footer">
+              <a href="#" id="btnYes" class="btn danger">Yes, complete login</a>
+              <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">No</a>
+            </div>
+        </div>
+        <div id="forgotPasswordModal" class="modal hide">
+            <div class="modal-header">
+                <a href="#" data-dismiss="modal" aria-hidden="true" class="close">×</a>
+                 <h3>Password Lookup</h3>
+            </div>
+            <div class="modal-body">
+                  <form class="form form-horizontal" id="formForgotPassword">    
+                  <div class="control-group">
+                      <label class="control-label" for="inputEmail">Email</label>
+                      <div class="controls">
+                          <input name="_csrf" id="token" type="hidden" value="sS0m8q6br0Nnf6pJMHfJw6NoIE2guJ+Wun3Bo=">
+                          <input type="email" name="email" id="inputEmail" placeholder="you@youremail.com" required="">
+                          <span class="help-block"><small>Enter the email address you used to sign-up.</small></span>
+                      </div>
+                  </div>
+                  </form>
+            </div>
+            <div class="modal-footer pull-center">
+                <a href="#" data-dismiss="modal" aria-hidden="true" class="btn">Cancel</a> 	
+            	<a href="#" data-dismiss="modal" id="btnForgotPassword" class="btn btn-success">Reset Password</a>
+            </div>
+            
+        </div>
+        <div id="upgradeModal" class="modal hide">
+            <div class="modal-header">
+                <a href="#" data-dismiss="modal" aria-hidden="true" class="close">×</a>
+                 <h4>Would you like to upgrade?</h4>
+            </div>
+            <div class="modal-body">
+                  <p class="text-center"><strong></strong></p>
+                  <h1 class="text-center">$3<small>/mo</small></h1>
+                  <p class="text-center">Unlimited plys. Unlimited downloads.</p>
+                  <p class="text-center"><img src="/assets/i_visa.png" width="50" alt="visa" /> <img src="/assets/i_mc.png" width="50" alt="mastercard"  /> <img src="/assets/i_amex.png" width="50" alt="amex" /> <img src="/assets/i_discover.png" width="50" alt="discover" /> <img src="/assets/i_paypal.png" width="50" alt="paypal" /></p>
+            </div>
+            <div class="modal-footer pull-center">
+            	<a href="/upgrade" class="btn btn-block btn-huge btn-success"><strong>Upgrade Now</strong></a>
+            	<a href="#" data-dismiss="modal" class="btn btn-block btn-huge">No Thanks, Maybe Later</a>
+            </div>
+        </div>
+        <div id="contactModal" class="modal hide">
+            <div class="modal-header">
+                <a href="#" data-dismiss="modal" aria-hidden="true" class="close">×</a>
+                <h3>Contact Us</h3>
+                <p>suggestions, questions or feedback</p>
+            </div>
+            <div class="modal-body">
+                  <form class="form form-horizontal" id="formContact">
+                      <input name="_csrf" id="token" type="hidden" value="sS0m8q6br0Nnf6pJMHfJw6NoIE2guJ+Wun3Bo=">
+                      <div class="control-group">
+                          <label class="control-label" for="inputSender">Name</label>
+                          <div class="controls">
+                              <input type="text" name="sender" id="inputSender" class="input-large" placeholder="Your name">
+                          </div>
+                      </div>
+                      <div class="control-group">
+                          <label class="control-label" for="inputMessage">Message</label>
+                          <div class="controls">
+                              <textarea name="notes" rows="5" id="inputMessage" class="input-large" placeholder="Type your message here"></textarea>
+                          </div>
+                      </div>
+                      <div class="control-group">
+                          <label class="control-label" for="inputEmail">Email</label>
+                          <div class="controls">
+                              <input type="text" name="email" id="inputEmail" class="input-large" placeholder="you@youremail.com (for reply)" required="">
+                          </div>
+                      </div>
+                  </form>
+            </div>
+            <div class="modal-footer pull-center">
+                <a href="#" data-dismiss="modal" aria-hidden="true" class="btn">Cancel</a>     
+                <a href="#" data-dismiss="modal" aria-hidden="true" id="btnContact" role="button" class="btn btn-success">Send</a>
+            </div>
+        </div>
+	</body>
+	<script src="/plugins/bootstrap-pager.js"></script>
+</html>

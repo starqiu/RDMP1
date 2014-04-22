@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+	<resultMap id="user" type="ustc.sse.model.User"  autoMapping="true">
+		<id property="userName" column="userName"/>
+		<id property="password" column="password"/>
+		<id property="email" column="email"/>
+		<id property="regDate" column="regDate"/>
+	</resultMap>
+	
+	<select id="selectAllUsers" resultMap="user">
+		select * from user
+	</select>
+	
+	<select id="selectUserByName" resultMap="user">
+		select * from user where userName = #{userName}
+	</select>
+	
+</mapper>

@@ -1,4 +1,4 @@
-package ustc.sse.jdbc;
+package ustc.sse.model;
 
 import java.util.Date;
 

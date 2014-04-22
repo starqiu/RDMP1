@@ -6,8 +6,8 @@
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="basenames">
         <list>
-            <value>/WEB-INF/messages/message</value>
-            <value>/WEB-INF/messages/message_zh_CN</value>
+            <value>/messages/message</value>
+            <value>/messages/message_zh_CN</value>
         </list>
         </property>
         <property name="cacheSeconds" value="3600"/>

@@ -13,7 +13,11 @@ package ustc.sse.service;
 
 import java.util.List;
 
-import ustc.sse.jdbc.User;
+import org.springframework.stereotype.Service;
+
+import ustc.sse.model.User;
+
+
 
 /**
  * 实现功能： 
@@ -23,10 +27,9 @@ import ustc.sse.jdbc.User;
  *2014-4-4	 邱星            starqiu@mail.ustc.edu.cn	      新建类<br /></p>
  *
  */
+@Service
 public interface UserService {
-	
-	public List<User> findAll();
-	public void modify(User user);
-
+	List<User> selectAllUsers();
+	User selectUserByName(String userName);
 }
 
