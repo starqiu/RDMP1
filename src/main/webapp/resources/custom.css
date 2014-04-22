@@ -3,6 +3,13 @@ footer {
     height: 50px;
     bottom: 0;
     width: 100%;
+    margin-top:20px;
+	padding-top:20px;
+	padding-bottom:20px;
+	background-color:#efefef;
+}
+.red {
+	color:red;
 }
 .form-signin {
   max-width: 330px;
@@ -50,13 +57,6 @@ i {
   color:#787878;
 }
   
-footer {
-  margin-top:20px;
-  padding-top:20px;
-  padding-bottom:20px;
-  background-color:#efefef;
-}
-
 /* count indicator near icons */
 .nav>li .count {
   position: absolute;

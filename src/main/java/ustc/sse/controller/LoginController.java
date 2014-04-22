@@ -26,7 +26,7 @@ import ustc.sse.model.User;
 import ustc.sse.service.UserService;
 
 /**
- * 实现功能： 登录
+ * 实现功能： 登录、注册及注销
  * <p>
  * date	    author            email		           notes<br />
  * --------	---------------------------	---------------<br />

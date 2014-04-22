@@ -4,6 +4,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@ page isELIgnored="false" %> 
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -19,7 +20,6 @@
 				<tiles:insertAttribute name="sider" />
 			</div>
 			<div class="col-md-10">
-				<a href="userInfo.do">${sessionScope.userName}</a>
 			  	<tiles:insertAttribute name="content" />
 			</div>
 		</div>
