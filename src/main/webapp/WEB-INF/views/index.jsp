@@ -4,5 +4,5 @@
 	<fmt:message key="hello.msg">
 		<fmt:param value="starqiu" />
 	</fmt:message>
-	<p>大数据环境下集成R语言的数据挖掘平台2</p>
+	<p>大数据环境下集成R语言的数据挖掘平台</p>
 </div>

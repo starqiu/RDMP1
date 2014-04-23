@@ -46,6 +46,7 @@ public class LoginController {
 	}
 
 	/**
+	 * 跳转到首页
 	 * @param request
 	 * @param response
 	 * @return 首页
@@ -53,8 +54,6 @@ public class LoginController {
 	@RequestMapping({"/","/index"})
 	public String index(HttpServletRequest request,HttpServletResponse response){
 		log.info("go to index page!");
-		List<User> users = this.getUserService().selectAllUsers();
-		
 		return "index";
 	}
 	
@@ -64,9 +63,29 @@ public class LoginController {
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping("login")
-	public String login(HttpServletRequest request,HttpServletResponse response){
+	@RequestMapping("loginLink")
+	public String loginLink(HttpServletRequest request,HttpServletResponse response){
 		return "login";
+	}
+	/**
+	 * 跳转到关于我们界面
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping("about")
+	public String about(HttpServletRequest request,HttpServletResponse response){
+		return "about";
+	}
+	/**
+	 * 跳转到联系我们界面
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping("contact")
+	public String contact(HttpServletRequest request,HttpServletResponse response){
+		return "contact";
 	}
 	
 	/**
@@ -75,8 +94,8 @@ public class LoginController {
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping("welcome")
-	public String welcome(HttpServletRequest request,HttpServletResponse response){
+	@RequestMapping("login")
+	public String login(HttpServletRequest request,HttpServletResponse response){
 		userName = request.getParameter("userName");
 		String pwd = request.getParameter("password");
 		User user = this.getUserService().selectUserByName(userName);
@@ -89,6 +108,21 @@ public class LoginController {
 			log.error("login failed!");
 			return "login";
 		}
+	}
+	
+	/**
+	 * 用户注销，跳转到首页界面
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping("logout")
+	public String logout(HttpServletRequest request,HttpServletResponse response){
+		userName = (String) request.getSession().getAttribute("userName");
+		if (null != userName) {
+			request.getSession().removeAttribute("userName");
+		}
+		return "index";
 	}
 	
 	public UserService getUserService() {

@@ -31,7 +31,7 @@ import ustc.sse.service.UserService;
 
 /**
  * service层我用的注解的方式配的，所以没写在Spring配置文件里
- * @author 百木森森
+ * 
  *
  */
 @Service("userService")
@@ -42,12 +42,40 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> selectAllUsers() {
-		return this.userDao.selectAllUsers();
+		return this.getUserDao().selectAllUsers();
 	}
 
 	@Override
 	public User selectUserByName(String userName) {
-		return this.userDao.selectUserByName(userName);
+		return this.getUserDao().selectUserByName(userName);
+	}
+
+	@Override
+	public List<User> selectUsers(String userName) {
+		return this.getUserDao().selectUsers(userName);
+	}
+
+	@Override
+	public int addUser(User user) {
+		return this.getUserDao().addUser(user);
+	}
+
+	@Override
+	public int deleteUser(String userName) {
+		return this.getUserDao().deleteUser(userName);
+	}
+
+	@Override
+	public int updateUser(User user) {
+		return this.getUserDao().updateUser(user);
+	}
+
+	public UserDao getUserDao() {
+		return userDao;
+	}
+
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
 	}
 	
 }
