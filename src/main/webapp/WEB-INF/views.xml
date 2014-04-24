@@ -9,7 +9,7 @@
 		<put-attribute name="sider" value="/WEB-INF/views/sider.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/views/footer.jsp" />
 	</definition>
-
+	<!-- login pages -->
 	<definition name="index" extends="template">
 		<put-attribute name="content" value="/WEB-INF/views/index.jsp" />
 	</definition>
@@ -28,17 +28,36 @@
 	<definition name="login" extends="template">
 		<put-attribute name="content" value="/WEB-INF/views/login.jsp" />
 	</definition>
+	<definition name="register" extends="template">
+		<put-attribute name="content" value="/WEB-INF/views/register.jsp" />
+	</definition>
 	<definition name="userInfo" extends="template">
 		<put-attribute name="content" value="/WEB-INF/views/userInfo.jsp" />
 	</definition>
+	<!-- user operate pages -->
 	<definition name="addUser" extends="template">
 		<put-attribute name="content" value="/WEB-INF/views/addUser.jsp" />
 	</definition>
 	<definition name="queryUsers" extends="template">
 		<put-attribute name="content" value="/WEB-INF/views/queryUsers.jsp" />
 	</definition>
+	<definition name="queryUsersList" extends="template">
+		<put-attribute name="content" value="/WEB-INF/views/queryUsersList.jsp" />
+	</definition>
 	<definition name="updateUser" extends="template">
 		<put-attribute name="content" value="/WEB-INF/views/updateUser.jsp" />
+	</definition>
+	<definition name="updateUserByAdmin" extends="template">
+		<put-attribute name="content" value="/WEB-INF/views/updateUserByAdmin.jsp" />
+	</definition>
+	<definition name="updateUserInput" extends="template">
+		<put-attribute name="content" value="/WEB-INF/views/updateUserInput.jsp" />
+	</definition>
+	<definition name="deleteUserInput" extends="template">
+		<put-attribute name="content" value="/WEB-INF/views/deleteUserInput.jsp" />
+	</definition>
+	<definition name="deleteUser" extends="template">
+		<put-attribute name="content" value="/WEB-INF/views/deleteUser.jsp" />
 	</definition>
 
 </tiles-definitions>

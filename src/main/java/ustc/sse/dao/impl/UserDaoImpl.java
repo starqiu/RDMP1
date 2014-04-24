@@ -41,13 +41,13 @@ public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao {
 	}
 
 	@Override
-	public User selectUserByName(String userName) {
-		return this.getSqlSession().selectOne("user.selectUserByName",userName);
+	public User selectUserByName(User user) {
+		return this.getSqlSession().selectOne("user.selectUserByName",user);
 	}
 
 	@Override
-	public List<User> selectUsers(String userName) {
-		return this.getSqlSession().selectList("user.selectUsers",userName);
+	public List<User> selectUsers(User user) {
+		return this.getSqlSession().selectList("user.selectUsers",user);
 	}
 
 	@Override
@@ -56,8 +56,8 @@ public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao {
 	}
 
 	@Override
-	public int deleteUser(String userName) {
-		return this.getSqlSession().delete("user.deleteUser", userName);
+	public int deleteUser(User user) {
+		return this.getSqlSession().delete("user.deleteUser", user);
 	}
 
 	@Override

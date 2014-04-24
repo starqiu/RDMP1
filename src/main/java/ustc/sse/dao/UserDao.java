@@ -37,13 +37,13 @@ public interface UserDao {
 	 * @param userName
 	 * @return
 	 */
-	User selectUserByName(String userName);
+	User selectUserByName(User user);
 	/**
 	 * 根据用户名得到用户列表
 	 * @param userName
 	 * @return
 	 */
-	List<User> selectUsers(String userName);
+	List<User> selectUsers(User user);
 	/**
 	 * 新增用户
 	 * @param user
@@ -55,7 +55,7 @@ public interface UserDao {
 	 * @param userName
 	 * @return
 	 */
-	int deleteUser(String userName);
+	int deleteUser(User user);
 	/**
 	 * 更新用户信息
 	 * @param user

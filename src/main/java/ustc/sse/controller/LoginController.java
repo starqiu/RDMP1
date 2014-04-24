@@ -11,7 +11,7 @@
  */
 package ustc.sse.controller;
 
-import java.util.List;
+import java.util.Date;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -98,7 +98,9 @@ public class LoginController {
 	public String login(HttpServletRequest request,HttpServletResponse response){
 		userName = request.getParameter("userName");
 		String pwd = request.getParameter("password");
-		User user = this.getUserService().selectUserByName(userName);
+		User param = new User();
+		param.setUserName(userName);
+		User user = this.getUserService().selectUserByName(param);
 		if (null != user && pwd != null && pwd.equals(user.getPassword())) {
 			request.getSession().setAttribute("userName", user.getUserName());
 			log.info("login success!");
@@ -108,6 +110,44 @@ public class LoginController {
 			log.error("login failed!");
 			return "login";
 		}
+	}
+	
+	/**
+	 * 用户注册界面
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping("registerLink")
+	public String registerLink(HttpServletRequest request,HttpServletResponse response){
+		return "register";
+	}
+	
+	/**
+	 * 用户注册，成功后跳转到欢迎界面
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping("register")
+	public String register(HttpServletRequest request,HttpServletResponse response){
+		userName = request.getParameter("userName");
+		String pwd = request.getParameter("password");
+		String email = request.getParameter("email");
+		User user = new User();
+		user.setUserName(userName);
+		user.setPassword(pwd);
+		user.setEmail(email);
+		user.setRegDate(new Date());
+		
+		int result = this.getUserService().addUser(user);
+		if (1 == result) {
+			log.info("register success!");
+			login(request, response);
+		} else {
+			log.info("register failed!");
+		}
+		return "index";
 	}
 	
 	/**
@@ -121,6 +161,7 @@ public class LoginController {
 		userName = (String) request.getSession().getAttribute("userName");
 		if (null != userName) {
 			request.getSession().removeAttribute("userName");
+			log.info("logout success!");
 		}
 		return "index";
 	}

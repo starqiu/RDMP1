@@ -22,12 +22,15 @@
 		select * from user 
 		where 1=1
 		<if test="userName != null">
-			and userName like #{userName}
+			and userName like '%${userName}%'
+		</if>
+		<if test="email != null">
+			and email like '%${email}%'
 		</if>
 	</select>
 	
 	<insert id="addUser">
-		insert into user values(#{user.userName},#{user.password},#{user.email},#{user.regDate})
+		insert into user values(#{userName},#{password},#{email},#{regDate})
 	</insert>
 	
 	<delete id="deleteUser">
@@ -37,12 +40,12 @@
 	<update id="updateUser">
 		update user 
 			<set>
-				password = #{user.password},
-				<if test="user.regDate != null">
-					regDate = #{user.regDate},
+				password = #{password},
+				<if test="regDate != null">
+					regDate = #{regDate},
 				</if>
-				email = #{user.email}
+				email = #{email}
 			</set>
-		where userName = #{user.userName}
+		where userName = #{userName}
 	</update>
 </mapper>

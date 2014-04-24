@@ -28,16 +28,16 @@ import javax.validation.constraints.Size;
  * @author 邱星
  */
 public class User {
-	/** 用户名*/
+	/** 用户名
 	@Size(min=3,max=20,message="user.length.required")
-	@Pattern(regexp="^{[a-zA-Z0-9]+_?}+[a-zA-Z0-9]+$",message="user.ptn.required")
+	@Pattern(regexp="^{[a-zA-Z0-9]+_?}+[a-zA-Z0-9]+$",message="user.ptn.required")*/
 	private String userName ;
-	/** 密码*/
+	/** 密码
 	@Size(min=6,max=20,message="pwd.length.required")
-	@Pattern(regexp="^[a-zA-Z0-9!@#$%*.]+$",message="pwd.ptn.required")
+	@Pattern(regexp="^[a-zA-Z0-9!@#$%*.]+$",message="pwd.ptn.required")*/
 	private String password ;
-	/** 邮箱*/
-	@Pattern(regexp="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}")
+	/** 邮箱
+	@Pattern(regexp="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}")*/
 	private String email ;
 	/** 注册日期*/
 	private Date regDate ;

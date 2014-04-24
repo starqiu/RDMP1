@@ -46,13 +46,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User selectUserByName(String userName) {
-		return this.getUserDao().selectUserByName(userName);
+	public User selectUserByName(User user) {
+		return this.getUserDao().selectUserByName(user);
 	}
 
 	@Override
-	public List<User> selectUsers(String userName) {
-		return this.getUserDao().selectUsers(userName);
+	public List<User> selectUsers(User user) {
+		return this.getUserDao().selectUsers(user);
 	}
 
 	@Override
@@ -61,8 +61,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int deleteUser(String userName) {
-		return this.getUserDao().deleteUser(userName);
+	public int deleteUser(User user) {
+		return this.getUserDao().deleteUser(user);
 	}
 
 	@Override

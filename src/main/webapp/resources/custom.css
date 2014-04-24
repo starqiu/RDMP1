@@ -11,6 +11,13 @@ footer {
 .red {
 	color:red;
 }
+.form-signin .field{
+	position: relative;
+	font-size: 16px;
+	height: auto;
+	padding: 10px 12px;
+	margin-bottom: 15px;
+}
 .form-signin {
   max-width: 330px;
   padding: 15px;
@@ -36,7 +43,7 @@ footer {
   z-index: 2;
 }
 .form-signin input[type="text"] {
-  margin-bottom: -1px;
+  margin-bottom: 10px;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }

@@ -42,10 +42,10 @@
 								class="icon-caret-down"></i> </a>
 							<ul
 								class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-								<li><a href="user/updateUserLink"> <i class="glyphicon glyphicon-cog"></i>
+								<li><a href="updateUserLink"> <i class="glyphicon glyphicon-cog"></i>
 										设置 </a>
 								</li>
-								<li><a href="user/userInfo"> <i class="glyphicon glyphicon-user"></i>
+								<li><a href="userInfo"> <i class="glyphicon glyphicon-user"></i>
 										个人资料 </a>
 								</li>
 								<li class="divider"></li>

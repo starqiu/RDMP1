@@ -5,13 +5,13 @@
 		data-target="#userMenu">
 		<h5>用户管理 <i class="glyphicon glyphicon-chevron-right"></i></h5> </a>
 		<ul class="list-unstyled collapse in" id="userMenu">
-			<li><a href="user/addUserLink"><i class="glyphicon glyphicon-plus"></i> 
+			<li><a href="addUserLink"><i class="glyphicon glyphicon-plus"></i> 
 					新增用户</a></li>
-			<li><a href="user/queryUsersLink"><i class="glyphicon glyphicon-search"></i>
+			<li><a href="queryUsersLink"><i class="glyphicon glyphicon-search"></i>
 					查询用户</a></li>
-			<li><a href="user/updateUserLink"><i class="glyphicon glyphicon-edit"></i>
+			<li><a href="updateUserByAdminLink"><i class="glyphicon glyphicon-edit"></i>
 					修改用户</a></li>
-			<li><a href="user/deleteUser"><i class="glyphicon glyphicon-trash"></i>
+			<li><a href="deleteUserLink"><i class="glyphicon glyphicon-trash"></i>
 					删除用户</a></li>
 		</ul>
 	</li>
@@ -19,13 +19,13 @@
 		data-target="#menu2">
 		<h5>数据挖掘任务管理 <i class="glyphicon glyphicon-chevron-right"></i></h5> </a>
 		<ul class="list-unstyled collapse in" id="menu2">
-			<li><a href="task/addTaskLink"><i class="glyphicon glyphicon-plus"></i> 
+			<li><a href="addTaskLink"><i class="glyphicon glyphicon-plus"></i> 
 					新增任务</a></li>
-			<li><a href="task/queryTasksLink"><i class="glyphicon glyphicon-search"></i>
+			<li><a href="queryTasksLink"><i class="glyphicon glyphicon-search"></i>
 					查询任务</a></li>
-			<li><a href="task/updateTaskLink"><i class="glyphicon glyphicon-edit"></i>
+			<li><a href="updateTaskLink"><i class="glyphicon glyphicon-edit"></i>
 					修改任务</a></li>
-			<li><a href="task/deleteTask"><i class="glyphicon glyphicon-trash"></i>
+			<li><a href="deleteTaskLink"><i class="glyphicon glyphicon-trash"></i>
 					删除任务</a></li>
 		</ul>
 	</li>
