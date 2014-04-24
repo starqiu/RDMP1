@@ -36,3 +36,4 @@ RDMP1
 	R语言相关资料：github上的DRDMP项目中和https://www.evernote.com/shard/s185/sh/37b4ee75-bfee-4039-bd63-e4205e20cfa3/00d728ffec91a88ca18e56a8a0afc091<br />
 	在Cloudera Hadoop CDH上安装R及RHadoop（rhdfs、rmr2、rhbase、RHive）：<br />
 		http://www.cnblogs.com/shudonghe/archive/2013/06/08/3126634.html<br />
+	胡磊的代码：http://git.oschina.net/hulei660066/AlipayContest.git
