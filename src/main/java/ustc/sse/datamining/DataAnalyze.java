@@ -72,7 +72,7 @@ public class DataAnalyze {
 //			addLogisticRegression2Table(myHightRecallResultTable);
 			
 			//只点击为购买的商品模块，待调优的地方：迭代时间；阈值
-			for (int i = 1; i <= 119; i++) {
+			for (int i = 1; i <= 119; i++) {//4个月
 				Hashtable<Integer, LinkedList<Integer>> rt = addOnlyClickedItemsModel2Table(
 						i, myHightRecallResultTable, MYSQLCONFIG.OnlyClickItems);
 				printCountOfTable(rt);
