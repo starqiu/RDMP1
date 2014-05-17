@@ -5,8 +5,7 @@
 library('rhdfs')
 hdfs.init()
 library('rmr2')  
-input<- '/tmp/wordcount/wordcount.txt'
-output<- '/tmp/wordcount/out11'
+input<- '/tmp/wordcount.txt'
 wordcount = function(input, output = NULL, pattern = " "){
 	 
 	wc.map = function(., lines) {
@@ -20,4 +19,5 @@ wordcount = function(input, output = NULL, pattern = " "){
 	mapreduce(input = input ,output = output, input.format = "text",
 			map = wc.map, reduce = wc.reduce,combine = T)
 }
-wordcount(input,output)
+output.hdfs <- wordcount(input)
+from.dfs(output.hdfs)

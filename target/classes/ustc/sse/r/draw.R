@@ -1,15 +1,49 @@
 #! /usr/bin/Rscript --vanilla
-# 
+# 淘宝天池竞赛
 # Author: starqiu
-###############################################################################
-library(Cairo)
-library(png)
-library(ggplot2)
-Cairo(file='/dev/null')
+############################################################################
+setwd('/home/starqiu/workspace/RDMP1/src/main/java/ustc/sse/r')
+draw.train <- function(){
+  train <- read.table('train.txt',
+                      header = F,
+                      dec = '.',
+                      col.names = c("user","item","pref"),
+                      na.strings = c('XXXXXX'))
+  summary(train)  
+  pdf("train.pdf")
+    attach(train)
+      opar <- par(no.readonly = TRUE)
+      par(mfrow = c(3,1))
+      plot(user,item,main="Scatterplot of user vs. item")
+      abline(lm(user~item))
+      plot(user,pref,main="Scatterplot of user vs. pref")
+      abline(lm(user~pref))
+      boxplot(pref,main="Boxplot of pref")
+      par(opar)
+    detach(train)
+  dev.off()
 
-qplot(rnorm(5000))# your plot# hidden stuff in Cairo
-i =Cairo:::.image(dev.cur())
-r =Cairo:::.ptr.to.raw(i$ref,0, i$width * i$height *4)
-dim(r)= c(4, i$width, i$height)# RGBA planes# have to swap the red & blue components for some reason
-r[c(1,3),,]= r[c(3,1),,]# now use the png library
-p = writePNG(r, raw())# raw PNG bytes
+}
+draw.train()
+train <- read.table('train.txt',
+                    header = F,
+                    dec = '.',
+                    col.names = c("user","item","pref"),
+                    na.strings = c('XXXXXX'))
+summary(train)  
+attach(mtcars)
+hist(wt)
+detach(mtcars)
+pdf("train.pdf")
+  attach(train)
+    opar <- par(no.readonly = TRUE)
+    par(mfrow = c(3,1))
+    plot(train$user,train$item,main="Scatterplot of user vs. item")
+    abline(lm(user~item))
+    plot(user,pref,main="Scatterplot of user vs. pref")
+    abline(lm(user~pref))
+    boxplot(pref,main="Boxplot of pref")
+    par(opar)
+    #sink()
+  detach(train)
+dev.off()

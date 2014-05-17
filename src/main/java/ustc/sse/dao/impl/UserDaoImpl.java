@@ -30,8 +30,6 @@ import ustc.sse.model.User;
  * 这里要注意，我继承了一个HibernateDaoSupport类，然后在Spring的配置文件中给这个类注入了一个
  * sessionFactory。这是为了能得到Hibernate的Session对象
  * 
- * @author 百木森森
- * 
  */
 public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao {
 
