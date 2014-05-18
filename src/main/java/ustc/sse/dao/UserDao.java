@@ -19,11 +19,10 @@ import ustc.sse.model.User;
 /**
  * 实现功能：对用户的增删改查
  * <p>
- * date author email notes<br />
- * -------- --------------------------- ---------------<br />
- * 2014-4-4 邱星 starqiu@mail.ustc.edu.cn 新建类<br />
- * </p>
- * 
+ * date	        author            email		           notes<br />
+ * ----------------------------------------------------------------<br />
+ *2014-2-19      邱星       starqiu@mail.ustc.edu.cn	    新建类<br /></p>
+ *
  */
 public interface UserDao {
 	

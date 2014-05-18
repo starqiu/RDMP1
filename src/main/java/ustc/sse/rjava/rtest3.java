@@ -21,7 +21,7 @@ import org.rosuda.JRI.Rengine;
  */
 
 /**
- * 实现功能： 
+ * 实现功能： R 与java的接口
  * <p>
  * date	        author            email		           notes<br />
  * ----------------------------------------------------------------<br />

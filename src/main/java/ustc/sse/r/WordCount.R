@@ -20,4 +20,4 @@ wordcount = function(input, output = NULL, pattern = " "){
 			map = wc.map, reduce = wc.reduce,combine = T)
 }
 output.hdfs <- wordcount(input)
-from.dfs(output.hdfs)
+write.table(from.dfs(output.hdfs), file="wordcount.txt", quote=FALSE, sep="\t",row.names = FALSE, col.names = FALSE)

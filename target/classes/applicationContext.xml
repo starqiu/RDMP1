@@ -72,4 +72,7 @@
     <bean id="userDao" class="ustc.sse.dao.impl.UserDaoImpl">  
         <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>  
     </bean>  
+    <bean id="taskDao" class="ustc.sse.dao.impl.TaskDaoImpl">  
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>  
+    </bean>  
 </beans>

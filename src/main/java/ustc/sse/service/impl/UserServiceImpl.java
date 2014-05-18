@@ -12,7 +12,7 @@
 package ustc.sse.service.impl;
 
 /**
- * 实现功能： 
+ * 实现功能： userService的实现类，为controller提供具体服务
  * <p>
  * date	    author            email		           notes<br />
  * --------	---------------------------	---------------<br />

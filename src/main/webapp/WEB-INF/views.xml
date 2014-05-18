@@ -31,6 +31,8 @@
 	<definition name="register" extends="template">
 		<put-attribute name="content" value="/WEB-INF/views/register.jsp" />
 	</definition>
+	
+	
 	<definition name="userInfo" extends="template">
 		<put-attribute name="content" value="/WEB-INF/views/userInfo.jsp" />
 	</definition>
@@ -58,6 +60,35 @@
 	</definition>
 	<definition name="deleteUser" extends="template">
 		<put-attribute name="content" value="/WEB-INF/views/deleteUser.jsp" />
+	</definition>
+	
+	<definition name="taskInfo" extends="template">
+		<put-attribute name="content" value="/WEB-INF/views/taskInfo.jsp" />
+	</definition>
+	<!-- task operate pages -->
+	<definition name="addTask" extends="template">
+		<put-attribute name="content" value="/WEB-INF/views/addTask.jsp" />
+	</definition>
+	<definition name="queryTasks" extends="template">
+		<put-attribute name="content" value="/WEB-INF/views/queryTasks.jsp" />
+	</definition>
+	<definition name="queryTasksList" extends="template">
+		<put-attribute name="content" value="/WEB-INF/views/queryTasksList.jsp" />
+	</definition>
+	<definition name="updateTask" extends="template">
+		<put-attribute name="content" value="/WEB-INF/views/updateTask.jsp" />
+	</definition>
+	<definition name="updateTaskByAdmin" extends="template">
+		<put-attribute name="content" value="/WEB-INF/views/updateTaskByAdmin.jsp" />
+	</definition>
+	<definition name="updateTaskInput" extends="template">
+		<put-attribute name="content" value="/WEB-INF/views/updateTaskInput.jsp" />
+	</definition>
+	<definition name="deleteTaskInput" extends="template">
+		<put-attribute name="content" value="/WEB-INF/views/deleteTaskInput.jsp" />
+	</definition>
+	<definition name="deleteTask" extends="template">
+		<put-attribute name="content" value="/WEB-INF/views/deleteTask.jsp" />
 	</definition>
 
 </tiles-definitions>

@@ -20,7 +20,7 @@ import ustc.sse.model.User;
 
 
 /**
- * 实现功能： 
+ * 实现功能： 用户服务类，为controller提供服务
  * <p>
  * date	    author            email		           notes<br />
  * --------	---------------------------	---------------<br />

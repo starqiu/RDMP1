@@ -8,8 +8,8 @@ library(DBI)
 library(RMySQL)
 drv <- dbDriver("MySQL")
 myconn<-dbConnect(drv,"tmailcontest","root","xing")
-tbdata<-dbGetQuery(myconn,"select * from tmail_firstseason limit 1000")
-#tbdata<-dbGetQuery(myconn,"select * from tmail_firstseason")
+#tbdata<-dbGetQuery(myconn,"select * from tmail_firstseason limit 1000")
+tbdata<-dbGetQuery(myconn,"select * from tmail_firstseason")
 dbDisconnect(myconn)
 
 #data split function

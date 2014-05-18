@@ -19,7 +19,7 @@ import ustc.sse.dao.UserDao;
 import ustc.sse.model.User;
 
 /**
- * 实现功能： 
+ * 实现功能： UserDao的实现类，与数据库通信，对用户的CRUD
  * <p>
  * date	    author            email		           notes<br />
  * --------	---------------------------	---------------<br />

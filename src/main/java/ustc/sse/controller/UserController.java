@@ -11,7 +11,6 @@
  */
 package ustc.sse.controller;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,10 +29,9 @@ import ustc.sse.service.UserService;
 /**
  * 实现功能： 对用户的增删改查
  * <p>
- * date author email notes<br />
- * -------- --------------------------- ---------------<br />
- * 2014-4-22 邱星 starqiu@mail.ustc.edu.cn 新建类<br />
- * </p>
+ * date	        author            email		           notes<br />
+ * ----------------------------------------------------------------<br />
+ *2014-2-19      邱星       starqiu@mail.ustc.edu.cn	    新建类<br /></p>
  * 
  */
 @Controller

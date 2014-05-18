@@ -8,5 +8,6 @@
     <mappers>
     <!--映射文件-->
        <mapper resource="user.xml"/>
+       <mapper resource="task.xml"/>
     </mappers>
 </configuration>
