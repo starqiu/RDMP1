@@ -28,7 +28,7 @@
 	</select>
 	
 	<insert id="addTask">
-		insert into task values(#{taskName},#{tableName},#{maxNum},#{creatDate})
+		insert into task (taskName,tableName,maxNum,creatDate) values(#{taskName},#{tableName},#{maxNum},#{creatDate})
 	</insert>
 	
 	<delete id="deleteTask">
@@ -38,12 +38,13 @@
 	<update id="updateTask">
 		update task 
 			<set>
-				password = #{password},
+				taskName = #{taskName},
+				tableName = #{tableName},
 				<if test="creatDate != null">
 					creatDate = #{creatDate},
 				</if>
-				email = #{email}
+				maxNum = #{maxNum}
 			</set>
-		where taskName = #{taskName}
+		where id = #{id}
 	</update>
 </mapper>

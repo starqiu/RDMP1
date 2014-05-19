@@ -55,10 +55,8 @@ public class TaskController {
 	@RequestMapping("taskInfo")
 	public String taskInfo(HttpServletRequest request,
 			HttpServletResponse response) {
-		taskName = request.getParameter("taskName");//管理员点击
-		if (null == taskName) {//点击设置修改自身数据挖掘任务资料
-			taskName = (String) request.getSession().getAttribute("taskName");
-		}
+		taskName = request.getParameter("taskName");
+		//int  id =Integer.valueOf(request.getParameter("id")).intValue() ;
 		if (null != taskName) {
 			Task param = new Task();
 			param.setTaskName(taskName);
@@ -75,26 +73,13 @@ public class TaskController {
 	}
 
 	/**
-	 * 跳转到更新数据挖掘任务页面
-	 * 
-	 * @param request
-	 * @param response
-	 * @return
-	 */
-	@RequestMapping("updateTaskLink")
-	public String updateTaskLink(HttpServletRequest request,
-			HttpServletResponse response) {
-		return "updateTask";
-	}
-	
-	/**
 	 * 跳转到更新数据挖掘任务-数据挖掘任务名输入页面
 	 * 
 	 * @param request
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping("updateTaskByAdminLink")
+	@RequestMapping("updateTaskLink")
 	public String updateTaskByAdminLink(HttpServletRequest request,
 			HttpServletResponse response) {
 		return "updateTaskInput";
@@ -111,7 +96,7 @@ public class TaskController {
 	public String updateTaskInput(HttpServletRequest request,
 			HttpServletResponse response) {
 		taskInfo(request, response);
-		return "updateTaskByAdmin";
+		return "updateTask";
 	}
 
 	/**
@@ -124,20 +109,16 @@ public class TaskController {
 	@RequestMapping("updateTask")
 	public String updateTask(HttpServletRequest request,
 			HttpServletResponse response) {
-		taskName = request.getParameter("taskName");//管理员点击修改数据挖掘任务，修改其他数据挖掘任务的资料
-		if (null == taskName) {//点击设置修改自身数据挖掘任务资料
-			taskName = (String) request.getSession().getAttribute("taskName");
-		}
-		if (null == taskName) {
-			log.info("您尚未登录！");
-			return "index";
-		}
-		String pwd = request.getParameter("password");
-		String email = request.getParameter("email");
+		taskName = request.getParameter("taskName");
+		int  id =Integer.valueOf(request.getParameter("id")).intValue() ;
+		String tableName = request.getParameter("tableName");
+		int maxNum = Integer.valueOf(request.getParameter("maxNum")).intValue();
 		Task task = new Task();
 		task.setTaskName(taskName);
-		//task.setPassword(pwd);
-		//task.setEmail(email);
+		task.setTableName(tableName);
+		task.setCreatDate(new Date());
+		task.setId(id);
+		task.setMaxNum(maxNum);
 		int result = this.getTaskService().updateTask(task);
 		if (1 == result) {
 			log.info("更新数据挖掘任务成功！");

@@ -39,8 +39,8 @@ public class rtest3 implements RMainLoopCallbacks{
         
         
         //String path = re.jriChooseFile(0);
-        //String cmd = "source('/home/starqiu/workspace/RDMP1/src/main/java/ustc/sse/r/tbmr.R',echo=TRUE)";
-        String cmd = "source('/home/starqiu/workspace/RDMP1/src/main/java/ustc/sse/r/WordCount.R',echo=TRUE)";
+        String cmd = "source('/home/starqiu/workspace/RDMP1/src/main/java/ustc/sse/r/tbmr.R',echo=TRUE)";
+        //String cmd = "source('/home/starqiu/workspace/RDMP1/src/main/java/ustc/sse/r/WordCount.R',echo=TRUE)";
         String rv = re.eval(cmd).asString();
         /*System.out.println(rv);
         String cmd2="area(10)";
