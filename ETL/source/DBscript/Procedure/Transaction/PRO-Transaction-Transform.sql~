@@ -1,0 +1,9 @@
+DELIMITER //
+CREATE PROCEDURE PRO-Transaction-Transform()
+BEGIN
+  into tmail_firstseason
+  select * from WRK_tmail_firstseason
+  where visit_datetime > '2015-01-01';
+END
+//
+DELIMITER;

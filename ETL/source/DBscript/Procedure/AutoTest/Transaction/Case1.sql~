@@ -1,0 +1,22 @@
+use tmailcontest;
+
+
+DELIMITER //
+CREATE PROCEDURE PRO_Transaction_Testcase1()
+BEGIN
+
+  DECLARE rowcount int;
+  select count(*)
+  from tmail_firstseason 
+  where type >10
+  into rowcount;
+
+  if rowcount >0 then 
+     SELECT 'Test case1 failed. There are '||rowcount||' records which type is illegal' INTO OUTFILE '/tmp/case1.txt'
+        FROM EXP_Table
+        WHERE APP='Transaction';
+  end if;
+END
+//
+DELIMITER ;
+

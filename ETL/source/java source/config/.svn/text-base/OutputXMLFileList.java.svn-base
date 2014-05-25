@@ -1,0 +1,111 @@
+package com.dbs.sg.DTE12.config;
+
+import com.ibm.etools.xmlschema.beans.ComplexType;
+
+/**
+* This class represents the complex type <OutputXMLFileList>
+*/
+public class OutputXMLFileList extends ComplexType
+{
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3989909093305953687L;
+
+public OutputXMLFileList()
+  {
+  }
+  
+  /**
+  * This inner class represents the anonymous type <file>
+  * within the complex type <OutputXMLFileList>
+  */
+  static public class file extends ComplexType
+  {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -249553977352089330L;
+
+	public file()
+    {
+    }
+    public void setFileName(String fileName)
+    {
+      setElementValue("fileName", fileName);
+    }
+    
+    public String getFileName()
+    {
+      return getElementValue("fileName");
+    }
+    
+    public boolean removeFileName()
+    {
+      return removeElement("fileName");
+    }
+    
+    public void setType(String type)
+    {
+      setElementValue("type", type);
+    }
+    
+    public String getType()
+    {
+      return getElementValue("type");
+    }
+    
+    public boolean removeType()
+    {
+      return removeElement("type");
+    }
+    
+		public void setSubtype(String subtype) {
+			setElementValue("subtype", subtype);
+		}
+
+		public String getSubtype() {
+			return getElementValue("subtype");
+		}
+
+		public boolean removeSubtype() {
+			return removeElement("subtype");
+		}
+		
+		public void setVersionNO(String versionNO) {
+      setElementValue("versionNO", versionNO);
+    }
+    
+    public String getVersionNO()
+    {
+      return getElementValue("versionNO");
+    }
+    
+    public boolean removeVersionNO()
+    {
+      return removeElement("versionNO");
+    }
+    
+  }
+  public void setFile(int index, OutputXMLFileList.file file)
+  {
+    setElementValue(index, "file", file);
+  }
+  
+  public OutputXMLFileList.file getFile(int index)
+  {
+    return (OutputXMLFileList.file) getElementValue("file", "OutputXMLFileList$file", index);
+  }
+  
+  public int getFileCount()
+  {
+    return sizeOfElement("file");
+  }
+  
+  public boolean removeFile(int index)
+  {
+    return removeElement(index, "file");
+  }
+  
+}
+

@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/gcs/!svn/ver/53/source%20code/java%20source/com/dbs/sg/DTE12/config
+END
+Entry.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/gcs/!svn/ver/53/source%20code/java%20source/com/dbs/sg/DTE12/config/Entry.java
+END
+Sample.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/gcs/!svn/ver/53/source%20code/java%20source/com/dbs/sg/DTE12/config/Sample.java
+END
+TableList.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/gcs/!svn/ver/53/source%20code/java%20source/com/dbs/sg/DTE12/config/TableList.java
+END
+gcsFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/gcs/!svn/ver/53/source%20code/java%20source/com/dbs/sg/DTE12/config/gcsFactory.java
+END
+DBConnection.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/gcs/!svn/ver/53/source%20code/java%20source/com/dbs/sg/DTE12/config/DBConnection.java
+END
+CommonTableCondition.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/gcs/!svn/ver/53/source%20code/java%20source/com/dbs/sg/DTE12/config/CommonTableCondition.java
+END
+Common.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/gcs/!svn/ver/53/source%20code/java%20source/com/dbs/sg/DTE12/config/Common.java
+END
+TargetTableList.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/gcs/!svn/ver/53/source%20code/java%20source/com/dbs/sg/DTE12/config/TargetTableList.java
+END
+InputFileList.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/gcs/!svn/ver/53/source%20code/java%20source/com/dbs/sg/DTE12/config/InputFileList.java
+END
+gcs.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/gcs/!svn/ver/53/source%20code/java%20source/com/dbs/sg/DTE12/config/gcs.java
+END
+Batchlist.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/gcs/!svn/ver/53/source%20code/java%20source/com/dbs/sg/DTE12/config/Batchlist.java
+END
+OutputXMLFileList.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/gcs/!svn/ver/53/source%20code/java%20source/com/dbs/sg/DTE12/config/OutputXMLFileList.java
+END

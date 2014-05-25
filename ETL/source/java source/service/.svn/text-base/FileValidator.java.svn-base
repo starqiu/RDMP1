@@ -1,0 +1,147 @@
+/**
+ *
+ * Created By: Remon Zhang
+ * Created On: 05 Mar 2007
+ *
+ * Amendment History:
+ * 
+ * Amended By       Amended On      Amendment Description
+ * ------------     -----------     ---------------------------------------------
+ * 
+ */
+package com.dbs.sg.DTE12.service;
+
+import java.io.File;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import com.dbs.sg.DTE12.DAO.DictionaryParaUpdateDAO;
+import com.dbs.sg.DTE12.common.LoadConfigXml;
+import com.dbs.sg.DTE12.common.Logger;
+import com.dbs.sg.DTE12.config.InputFileList;
+
+public class FileValidator {
+	/**
+	 * Logger
+	 */
+	private static Logger logger;
+
+	// private Batchlist iBatchlist;
+	private InputFileList inputFileList;
+	private List invalidFiles = new ArrayList();
+
+	// 2010.07.14 Jason
+	private DictionaryParaUpdateDAO dao;
+
+	public boolean validate(String configPath, String batchId)
+			throws SQLException, ParseException {
+		logger.info("configPath:" + configPath + ",batchId:" + batchId
+				+ " checking Files Start.");
+		LoadConfigXml configXmlHelper = LoadConfigXml.getConfig(configPath);
+		if (configXmlHelper.getBatch(batchId) == null) {
+			logger.error("configPath:" + configPath + ",batchId:" + batchId
+					+ " has not been found.");
+			return false;
+		}
+		dao = new DictionaryParaUpdateDAO(configPath);
+
+		inputFileList = configXmlHelper.getBatch(batchId).getInputFileList();
+		invalidFiles.clear();
+		for (int j = 0; j < inputFileList.getFileCount(); j++) {
+			String filename = inputFileList.getFile(j).getFileName();
+			logger.info("File " + filename + " is checking");
+			// add by Jason to support filename pattern
+			if (filename.indexOf("_n") > 0)
+				filename = filename.replaceAll("_n", "_1");
+			String format = "(.*)(yyyy[-._/]?MM[-._/]?dd)(.*)";
+			if (filename.matches(format)) {
+				// System.out.println(filename.replaceAll(format, "$2"));
+				SimpleDateFormat sdf = new SimpleDateFormat(filename
+						.replaceAll(format, "$2"));
+				SimpleDateFormat sdfbusdate = new SimpleDateFormat("yyyy-MM-dd");
+				// System.out.println("$1("+sdf.format(new Date())+")$3");
+				if ("busdate".equalsIgnoreCase(inputFileList.getFile(j)
+						.getDateType()))
+					filename = filename
+							.replaceAll(
+									format,
+									"$1"
+											+ sdf
+													.format(sdfbusdate
+															.parse(dao
+																	.getDictPara(
+																			"_ALL_",
+																			DictionaryParaUpdateDAO.keyBusDate)))
+											+ "$3");
+				else
+					filename = filename.replaceAll(format, "$1"
+							+ sdf.format(new Date()) + "$3");
+				// System.out.println(filename);
+			}
+
+			if (!isExistFile(configXmlHelper.getBasePath() + filename)) {
+				invalidFiles.add(configXmlHelper.getBasePath()
+						+ inputFileList.getFile(j).getFileName());
+				logger.error("File " + configXmlHelper.getBasePath()
+						+ inputFileList.getFile(j).getFileName()
+						+ " not exist,please check");
+				return false;
+			}
+		}
+		logger.info("configPath:" + configPath + ",batchId:" + batchId
+				+ " check all File Successful.");
+		return true;
+	}
+
+	public boolean isExistFile(String fileName) {
+		if (fileName == null)
+			return false;
+
+		File file = new File(fileName);
+
+		if (!file.exists()) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/***************************************************************************
+	 * PARAMETERS: String: batchId
+	 **************************************************************************/
+	public static void main(String[] args) {
+		String batchId = null;
+		String configPath = null;
+		boolean result = false;
+		if (args.length < 2) {
+			// logger.error("need paramters");
+			System.out.println("need paramters");
+			System.exit(-1);
+			return;
+		} else {
+			configPath = args[0];
+			batchId = args[1];
+		}
+		logger = Logger.getLogger(configPath, FileValidator.class);
+
+		try {
+			FileValidator validator = new FileValidator();
+			result = validator.validate(configPath, batchId);
+			if (result == true) {
+				System.out.println("0");
+				System.exit(0);
+			} else {
+				// System.out.println("1");
+				System.out.println(validator.invalidFiles.toString());
+				System.exit(1);
+			}
+		} catch (Exception e) {
+			logger.error("Error while checking input file.", e);
+			System.exit(1);
+		}
+	}
+}

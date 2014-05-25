@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="task">
+	<resultMap id="task" type="ustc.sse.model.Task"  autoMapping="true">
+		<id property="id" column="id"/>
+		<id property="taskName" column="taskName"/>
+		<id property="tableName" column="tableName"/>
+		<id property="maxNum" column="maxNum"/>
+		<id property="creatDate" column="creatDate"/>
+	</resultMap>
+	
+	<select id="selectAllTasks" resultMap="task">
+		select * from task
+	</select>
+	
+	<select id="selectTaskByName" resultMap="task">
+		select * from task where taskName = #{taskName}
+	</select>
+	
+	<select id="selectTasks" resultMap="task">
+		select * from task 
+		where 1=1
+		<if test="taskName != null">
+			and taskName like '%${taskName}%'
+		</if>
+	</select>
+	
+	<insert id="addTask">
+		insert into task (taskName,tableName,maxNum,creatDate) values(#{taskName},#{tableName},#{maxNum},#{creatDate})
+	</insert>
+	
+	<delete id="deleteTask">
+		delete from task where taskName = #{taskName}
+	</delete>
+	
+	<update id="updateTask">
+		update task 
+			<set>
+				taskName = #{taskName},
+				tableName = #{tableName},
+				<if test="creatDate != null">
+					creatDate = #{creatDate},
+				</if>
+				maxNum = #{maxNum}
+			</set>
+		where id = #{id}
+	</update>
+</mapper>

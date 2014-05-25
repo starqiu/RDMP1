@@ -1,0 +1,19 @@
+package com.dbs.sg.DTE12.config;
+
+
+/**
+* This class represents the global element <gcs>
+*/
+public class gcs extends Entry
+{
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3204024365768284159L;
+
+public gcs()
+  {
+  }
+  
+}
+

@@ -1,0 +1,84 @@
+package com.dbs.sg.DTE12.service;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import com.dbs.sg.DTE12.common.AESManager;
+import com.dbs.sg.DTE12.common.LoadConfigXml;
+import com.dbs.sg.DTE12.common.Logger;
+
+public class sqlldr {
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		if (args.length < 2) {
+			System.out.println("1");
+			System.exit(1);
+		}
+		String configPath = args[0];
+		boolean skipFlag=true;
+
+		LoadConfigXml configXml = LoadConfigXml.getConfig(configPath);
+		AESManager aes = new AESManager(configPath);
+		String pwd = aes.Descrypt(configXml.getKeyFile(), configXml.getEncryptFile());
+		Logger logger = Logger.getLogger(configPath, sqlldr.class);
+
+		try {
+			logger.info("Start to run sqlldr with parameters:"
+					+ Arrays.asList(args));
+			List plist = new ArrayList();
+			plist.add("sqlldr");
+			plist.add("userid=" + configXml.getUserid() + "@"
+					+ configXml.getDBName());
+			for (int j = 1; j < args.length; j++) {
+				if(args[j].equals("load=NA")){
+					skipFlag=false;
+					continue;
+				}
+				else if(args[j].indexOf("skip")>=0 && !skipFlag)
+					continue;
+				plist.add(args[j]);
+				if (args[j].indexOf("load") >= 0)
+					plist.add(args[j].replaceFirst("load", "errors"));
+			}
+			String[] params = new String[plist.size()];
+			for (int i = 0; i < plist.size(); i++) {
+				params[i] = (String) plist.get(i);
+			}
+
+			Process proc = Runtime.getRuntime().exec(params,null);
+
+			PrintWriter pr = new PrintWriter(proc.getOutputStream(), true);
+
+			pr.println(pwd);
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(proc
+					.getInputStream()));
+			String line = null;
+			while ((line = br.readLine()) != null)
+				logger.info("sqlldr>" + line);
+			int result = proc.waitFor();
+			logger.info("sqlldr>result:" + result);
+			if (result != 0) {
+				logger.error("Run sqlldr failed with return code[" + result
+						+ "].");
+				System.out.println(result);
+				System.exit(result);
+			}
+
+			logger.info("Run sqlldr completely with parameters:"
+					+ Arrays.asList(args));
+			System.out.println("0");
+		} catch (Exception e) {
+			// e.printStackTrace();
+			logger.error("Run sqlldr failed.", e);
+			System.out.println("1");
+			System.exit(1);
+		}
+	}
+}

@@ -1,0 +1,85 @@
+package com.dbs.sg.DTE12.config;
+
+import com.ibm.etools.xmlschema.beans.ComplexType;
+
+/**
+ * This class represents the complex type <TargetTableList>
+ */
+public class TargetTableList extends ComplexType
+{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5077976402672299957L;
+
+	public TargetTableList()
+	{
+	}
+
+	/**
+	 * This inner class represents the anonymous type <targetTable>
+	 * within the complex type <TargetTableList>
+	 */
+	static public class targetTable extends ComplexType
+	{
+		
+		private static final long serialVersionUID = -3608482023530919829L;
+
+		public targetTable()
+		{
+		}
+
+		public void setName(String name)
+		{
+			setElementValue("name", name);
+		}
+
+		public String getName()
+		{
+			return getElementValue("name");
+		}
+
+		public boolean removeName()
+		{
+			return removeElement("name");
+		}
+
+		public void setWhere(String where)
+		{
+			setElementValue("where", where);
+		}
+
+		public String getWhere()
+		{
+			return getElementValue("where");
+		}
+
+		public boolean removeWhere()
+		{
+			return removeElement("where");
+		}
+
+	}
+	
+	public void setTargetTable(int index, TargetTableList.targetTable targetTable)
+	{
+		setElementValue(index, "targetTable", targetTable);
+	}
+
+	public TargetTableList.targetTable getTargetTable(int index)
+	{
+		return (TargetTableList.targetTable) getElementValue("targetTable", "TargetTableList$targetTable", index);
+	}
+
+	public int getTargetTableCount()
+	{
+		return sizeOfElement("targetTable");
+	}
+
+	public boolean removeTargetTable(int index)
+	{
+		return removeElement(index, "targetTable");
+	}
+
+}
+

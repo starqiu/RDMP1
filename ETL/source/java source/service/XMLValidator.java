@@ -1,0 +1,110 @@
+package com.dbs.sg.DTE12.service;
+
+import java.net.URL;
+
+import oracle.xml.parser.schema.XMLSchema;
+import oracle.xml.parser.schema.XSDBuilder;
+import oracle.xml.parser.v2.SAXParser;
+import oracle.xml.parser.v2.XMLParser;
+
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
+import org.xml.sax.helpers.DefaultHandler;
+
+import com.dbs.sg.DTE12.common.LoadConfigXml;
+import com.dbs.sg.DTE12.common.Logger;
+
+public class XMLValidator {
+
+	/**
+	 * Logger
+	 */
+	private static Logger logger;
+
+	private static final String PROTOCOL = "file:";
+
+	public void validateSchema(String SchemaUrl, String XmlDocumentUrl) throws Exception {
+		logger.info("validateSchema(SchemaUrl=" + SchemaUrl +
+				",XmlDocumentUrl=" + XmlDocumentUrl +
+				") - begin.");
+		SAXParser saxParser = new SAXParser();
+		saxParser.setValidationMode(XMLParser.SCHEMA_VALIDATION);
+
+		XSDBuilder builder = new XSDBuilder();
+		URL url = new URL(SchemaUrl);
+		XMLSchema schemadoc = (XMLSchema) builder.build(url);
+		saxParser.setXMLSchema(schemadoc);
+
+		Validator handler = new Validator();
+		saxParser.setErrorHandler(handler);
+		saxParser.parse(XmlDocumentUrl);
+
+		if (handler.validationError == true) {
+			throw new Exception("XML Document[" + XmlDocumentUrl + "] has Error :"
+					+ handler.validationError + " "
+					+ handler.saxParseException.getMessage() + " "
+					+ handler.saxParseException.getLocalizedMessage());
+		} else {
+			logger.info("SchemaUrl: " + SchemaUrl + ";XmlDocumentUrl"
+					+ XmlDocumentUrl + ";XML Document is valid");
+		}
+	}
+
+	private class Validator extends DefaultHandler {
+		public boolean validationError = false;
+
+		public SAXParseException saxParseException = null;
+
+		public void error(SAXParseException exception) throws SAXException {
+			validationError = true;
+			saxParseException = exception;
+		}
+
+		public void fatalError(SAXParseException exception) throws SAXException {
+			validationError = true;
+			saxParseException = exception;
+		}
+
+		public void warning(SAXParseException exception) throws SAXException {
+		}
+	}
+
+	/***************************************************************************
+	 * PARAMETERS: String: batchId,configPath
+	 **************************************************************************/
+	public static void main(String[] args) {
+		String batchId = null;
+		String configPath = null;
+		if (args.length < 2) {
+//			logger.error("need paramters");
+			System.out.println("1");
+			return;
+		} else {
+			configPath = args[0];
+			batchId = args[1];
+		}
+		logger = Logger.getLogger(configPath, XMLValidator.class);
+		try {
+			
+			LoadConfigXml configXmlHelpe = LoadConfigXml.getConfig(configPath);
+			logger.info("configPath :" + configPath + ",batchId :" + batchId
+					+ " xml validation start!");
+			XMLValidator validator = new XMLValidator();
+			String SchemaUrl = configXmlHelpe.getXMLSchemal();
+			String XmlDocumentUrl = null;
+			for (int i = 0; i < configXmlHelpe
+					.getOutputXMLFileNameList(batchId).length; i++) {
+				XmlDocumentUrl = configXmlHelpe
+						.getOutputXMLFileNameList(batchId)[i];
+				
+				validator.validateSchema(PROTOCOL + SchemaUrl,
+						PROTOCOL + XmlDocumentUrl);
+			}
+			System.out.println("0");
+		} catch (Exception e) {
+			logger.error("An error occured while validating databox of batch["
+					+ batchId + "]:", e);
+			System.out.println("-1");
+		}
+	}
+}
