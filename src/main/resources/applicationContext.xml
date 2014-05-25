@@ -20,6 +20,7 @@
 	<import resource="i18n.xml" />
 
 	<mvc:resources location="/resources/" mapping="/resources/**" />
+	<mvc:resources location="/images/" mapping="/images/**" />
 	<mvc:resources location="/fonts/" mapping="/fonts/**" />
 	<!-- 添加注解驱动 -->
 	<mvc:annotation-driven />
@@ -54,7 +55,7 @@
 		<property name="url" value="jdbc:mysql://localhost:3306/tmailcontest">
 		</property>
 		<property name="username" value="root"></property>
-		<property name="password" value="xing"></property>
+		<property name="password" value=""></property>
 	</bean>
 	
 	<!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->    

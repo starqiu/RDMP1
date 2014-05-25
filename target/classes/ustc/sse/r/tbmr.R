@@ -7,7 +7,7 @@
 library(DBI)
 library(RMySQL)
 drv <- dbDriver("MySQL")
-myconn<-dbConnect(drv,"tmailcontest","root","xing")
+myconn<-dbConnect(drv,"tmailcontest","root","")
 tbdata<-dbGetQuery(myconn,"select * from tmail_firstseason limit 10")
 #tbdata<-dbGetQuery(myconn,"select * from tmail_firstseason")
 dbDisconnect(myconn)
@@ -32,6 +32,12 @@ train <- ddply(train,.(user_id,brand_id,type),summarize,pref=getpref(type[1]))
 names(train)<-c("user","item","type","pref")
 train <- train[c("user","item","pref")]
 write.table(train, file="train.txt", quote=FALSE, sep="\t", row.names = FALSE, col.names = FALSE)
+
+validate <- ddply(validate,.(user_id,brand_id,type),summarize,pref=getpref(type[1]))
+names(validate)<-c("user","item","type","pref")
+validate <- validate[c("user","item","pref")]
+write.table(validate, file="validate.txt", quote=FALSE, sep="\t", row.names = FALSE, col.names = FALSE)
+
 #map and reduce
 library('rhdfs')
 hdfs.init()
@@ -45,6 +51,8 @@ from.dfs(train.hdfs)
 rm(train)
 
 #STEP 1, 建立物品的同现矩阵
+
+
 # 1) 按用户分组，得到所有物品出现的组合列表。
 train.mr<-mapreduce(
   train.hdfs, 
@@ -60,6 +68,27 @@ from.dfs(train.mr)
 write.table(from.dfs(train.mr), file="trainMr.txt", quote=FALSE, sep="\t",row.names = FALSE, col.names = FALSE)
 
 # 2) 对物品组合列表进行计数，建立物品的同现矩阵
+#按用户分组，找到每个用户所选的物品，单独出现计数，及两两一组计数。
+#
+#例如：用户ID为3的用户，分别给101,104,105,107，这4个物品打分。
+#1) (101,101),(104,104),(105,105),(107,107)，单独出现计算各加1。
+#2) (101,104),(101,105),(101,107),(104,105),(104,107),(105,107)，两个一组计数各加1。
+#3) 把所有用户的计算结果求和，生成一个三角矩阵，再补全三角矩阵，就建立了物品的同现矩阵。
+#
+#如下面矩阵所示：
+#
+#
+#      [101] [102] [103] [104] [105] [106] [107]
+#[101]   5     3     4     4     2     2     1
+#[102]   3     3     3     2     1     1     0
+#[103]   4     3     4     3     1     2     0
+#[104]   4     2     3     4     2     2     1
+#[105]   2     1     1     2     2     1     1
+#[106]   2     1     2     2     1     2     0
+#[107]   1     0     0     1     1     0     1
+#此处的格式为:
+# key val freq
+# 101 102  3
 step2.mr<-mapreduce(
   train.mr,
   map = function(k, v) {

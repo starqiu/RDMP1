@@ -24,6 +24,7 @@
 						<td>${tasks[s.index].maxNum }</td>
 						<td><fmt:formatDate value="${tasks[s.index].creatDate }" pattern="yyyy年MM月dd日"/></td>
 						<td>
+							<a href="taskInfo?taskName=${tasks[s.index].taskName }" >查看</a>&nbsp;&nbsp;
 							<a href="updateTaskInput?taskName=${tasks[s.index].taskName }" >修改</a>&nbsp;&nbsp;
 							<a href="deleteTaskInput?taskName=${tasks[s.index].taskName }" >删除</a>
 						</td>
@@ -36,6 +37,7 @@
 						<td>${tasks[s.index].maxNum }</td>
 						<td><fmt:formatDate value="${tasks[s.index].creatDate }" pattern="yyyy年MM月dd日"/></td>
 						<td>
+							<a href="taskInfo?taskName=${tasks[s.index].taskName }" >查看</a>&nbsp;&nbsp;
 							<a href="updateTaskInput?taskName=${tasks[s.index].taskName }" >修改</a>&nbsp;&nbsp;
 							<a href="deleteTaskInput?taskName=${tasks[s.index].taskName }" >删除</a>
 						</td>

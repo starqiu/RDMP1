@@ -65,6 +65,9 @@
 	<definition name="taskInfo" extends="template">
 		<put-attribute name="content" value="/WEB-INF/views/taskInfo.jsp" />
 	</definition>
+	<definition name="taskDetail" extends="template">
+		<put-attribute name="content" value="/WEB-INF/views/taskDetail.jsp" />
+	</definition>
 	<!-- task operate pages -->
 	<definition name="addTask" extends="template">
 		<put-attribute name="content" value="/WEB-INF/views/addTask.jsp" />

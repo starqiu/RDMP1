@@ -32,15 +32,29 @@ import org.rosuda.JRI.Rengine;
 public  class RJavaInterface implements RMainLoopCallbacks{
 	
 	private Log log = LogFactory.getLog(RJavaInterface.class);
-	public Rengine re ;
-	//= new Rengine(new String[] { "--vanilla" }, false, new RJavaInterface());
+	private static RJavaInterface rJavaInterface ;
+	public static Rengine re ;
 
 	public RJavaInterface() {
 		super();
 	}
 	
+	public static synchronized RJavaInterface getInstance(){
+		if (null == rJavaInterface) {
+			rJavaInterface = new RJavaInterface();
+		}
+		return rJavaInterface;
+	}
+	
+	public static synchronized Rengine getRengine(){
+		if (null == re) {
+			re = new Rengine(new String[] { "--vanilla" }, false, new RJavaInterface());
+		}
+		return re;
+	}
+	
 	public void callRJava() {
-        if (!re.waitForR()) {
+        if (!getRengine().waitForR()) {
         	log.error("Can not load R!");
         }
         /*String path = re.jriChooseFile(0);
@@ -54,7 +68,7 @@ public  class RJavaInterface implements RMainLoopCallbacks{
         for (int b : res.asIntArray()) {
 			System.out.println(b);
 		}*/
-        re.end();
+        getRengine().end();
     }
 
 	public String rReadConsole(Rengine re, String prompt, int addToHistory) {

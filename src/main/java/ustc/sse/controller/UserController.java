@@ -185,6 +185,7 @@ public class UserController {
 			log.info("add user success!");
 		} else {
 			log.info("add user failed!");
+			return "operateFailed";
 		}
 		return "operateSuccess";
 	}

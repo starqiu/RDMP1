@@ -18,7 +18,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import ustc.sse.rjava.RJavaInterface;
 
@@ -31,21 +30,42 @@ import ustc.sse.rjava.RJavaInterface;
  *
  */
 @Controller
-public class DataMiningController extends RJavaInterface{
+public class DataMiningController {
 	private Log log = LogFactory.getLog(DataMiningController.class);
 	
 	public DataMiningController(){
 		super();
 	}
 	
-	@RequestMapping("mapred.do")
-	public ModelAndView mapred(HttpServletRequest request,HttpServletResponse response){
-		callRJava();
-		String cmd = "source('../r/WordCount.R')";
-        String rv = re.eval(cmd).asString();
-        log.info("the result of source WordCount.R is:"+rv);
+	@RequestMapping("dataMining")
+	public String dataMining(HttpServletRequest request,HttpServletResponse response){
+		if (!RJavaInterface.getRengine().waitForR()) {
+        	log.error("Can not load R!");
+        }
+		
+		//数据挖掘
+		String cmd = "source('/home/starqiu/workspace/RDMP1/src/main/java/ustc/sse/r/tbmr.R',echo=TRUE)";
+        String rv = "";
+        try {
+			rv = RJavaInterface.getRengine().eval(cmd).asString();
+			log.info("data mining succeed!");
+			log.info("the result of source tbmr.R is:"+rv);
+		} catch (Exception e) {
+			log.error("data mining failed!");
+		}
         
-		return new ModelAndView("result","mapRedRst",rv);
+        //画图
+        cmd = "source('/home/starqiu/workspace/RDMP1/src/main/java/ustc/sse/r/draw.R',echo=TRUE)";
+        try {
+			rv = RJavaInterface.getRengine().eval(cmd).asString();
+			log.info("data visual succeed!");
+			log.info("the result of source draw.R is:"+rv);
+		} catch (Exception e) {
+			log.error("data visual failed!");
+		}
+        
+        RJavaInterface.getRengine().end();
+		return "taskDetail";
 	}
 
 }

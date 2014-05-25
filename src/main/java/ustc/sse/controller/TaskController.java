@@ -71,6 +71,20 @@ public class TaskController {
 		}
 		return "taskInfo";
 	}
+	
+	/**
+	 * 显示数据挖掘任务资料
+	 * 
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping("taskDetail")
+	public String taskDetail(HttpServletRequest request,
+			HttpServletResponse response) {
+		taskName = request.getParameter("taskName");
+		return "taskDetail";
+	}
 
 	/**
 	 * 跳转到更新数据挖掘任务-数据挖掘任务名输入页面
@@ -166,8 +180,11 @@ public class TaskController {
 			log.info("add task success!");
 		} else {
 			log.info("add task failed!");
+			return "operateFailed";
 		}
-		return "operateSuccess";
+		this.taskInfo(request, response);//保存持久化后的task信息
+		request.setAttribute("addTask", 1);
+		return "taskInfo";
 	}
 
 	/**
