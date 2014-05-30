@@ -4,7 +4,6 @@
 	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources"/>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java"/>
 	<classpathentry excluding="**" kind="src" output="target/test-classes" path="src/test/resources"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
@@ -19,5 +18,15 @@
 	<classpathentry kind="lib" path="/usr/local/hadoop/hadoop-ant-1.2.1.jar" sourcepath="/host/快盘/Java/hadoop-1.2.1/~hadoop-ant-1.2.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JRI_DIR"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Hadoop_DIR"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/home/starqiu/下载/IKAnalyzer2012_u6/IKAnalyzer2012_u6.jar" sourcepath="/home/starqiu/下载/IKAnalyzer2012_u6">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/home/starqiu/下载/IKAnalyzer2012_u6/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="src/main/webapp/src/main/java"/>
 </classpath>

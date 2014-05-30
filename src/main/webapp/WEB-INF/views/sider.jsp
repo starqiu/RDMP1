@@ -16,9 +16,9 @@
 		</ul>
 	</li>
 	<li class="nav-header"><a href="#" data-toggle="collapse"
-		data-target="#menu2">
+		data-target="#taskMenu">
 		<h5>数据挖掘任务管理 <i class="glyphicon glyphicon-chevron-right"></i></h5> </a>
-		<ul class="list-unstyled collapse in" id="menu2">
+		<ul class="list-unstyled collapse in" id="taskMenu">
 			<li><a href="addTaskLink"><i class="glyphicon glyphicon-plus"></i> 
 					新增任务</a></li>
 			<li><a href="queryTasksLink"><i class="glyphicon glyphicon-search"></i>
@@ -27,6 +27,14 @@
 					修改任务</a></li>
 			<li><a href="deleteTaskLink"><i class="glyphicon glyphicon-trash"></i>
 					删除任务</a></li>
+		</ul>
+	</li>
+	<li class="nav-header"><a href="#" data-toggle="collapse"
+		data-target="#moreMenu">
+		<h5>更多数据挖掘功能 <i class="glyphicon glyphicon-chevron-right"></i></h5> </a>
+		<ul class="list-unstyled collapse in" id="moreMenu">
+			<li><a href="autoDocumentInput"><i class="glyphicon glyphicon-book"></i> 
+					文章分类</a></li>
 		</ul>
 	</li>
 </ul>

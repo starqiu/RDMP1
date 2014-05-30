@@ -93,5 +93,13 @@
 	<definition name="deleteTask" extends="template">
 		<put-attribute name="content" value="/WEB-INF/views/deleteTask.jsp" />
 	</definition>
+	
+	<!--auto document pages -->
+	<definition name="autoDocument" extends="template">
+		<put-attribute name="content" value="/WEB-INF/views/autoDocument.jsp" />
+	</definition>
+	<definition name="autoDocumentInput" extends="template">
+		<put-attribute name="content" value="/WEB-INF/views/autoDocumentInput.jsp" />
+	</definition>
 
 </tiles-definitions>

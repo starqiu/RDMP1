@@ -18,7 +18,7 @@ import ustc.sse.model.Task;
 
 /**
  * 实现功能：对数据挖掘任务的增删改查
-* <p>
+ * <p>
  * date	        author            email		           notes<br />
  * ----------------------------------------------------------------<br />
  *2014-2-19      邱星       starqiu@mail.ustc.edu.cn	    新建类<br /></p>
