@@ -101,5 +101,13 @@
 	<definition name="autoDocumentInput" extends="template">
 		<put-attribute name="content" value="/WEB-INF/views/autoDocumentInput.jsp" />
 	</definition>
+	
+	<!--K-Means pages -->
+	<definition name="kMeans" extends="template">
+		<put-attribute name="content" value="/WEB-INF/views/kMeans.jsp" />
+	</definition>
+	<definition name="kMeansInput" extends="template">
+		<put-attribute name="content" value="/WEB-INF/views/kMeansInput.jsp" />
+	</definition>
 
 </tiles-definitions>

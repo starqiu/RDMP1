@@ -1,11 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=gb2312"
-	pageEncoding="gb2312"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false" %> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<% request.setCharacterEncoding("gb2312"); %>
+<% response.setContentType("text/html;charset=UTF-8"); %>
+<% request.setCharacterEncoding("UTF-8"); %>
 
 <form class="form-signin" role="form" action="autoDocument" method="post">
-	<h4 class="form-signin-heading">Ê¹ÓÃÆÓËØ±´Ò¶Ë¹Ëã·¨½«ÎÄÕÂ×Ô¶¯·ÖÀà</h4>
-	<textarea id="article" cols="300" name="article" type="text" class="form-control" placeholder="ÇëÊäÈëÎÄÕÂÄÚÈÝ" required autofocus ></textarea><br />
-	<button class="btn btn-lg btn-primary btn-block" type="submit">×Ô¶¯·ÖÀà</button>
+	<h4 class="form-signin-heading">ä½¿ç”¨æœ´ç´ è´å¶æ–¯ç®—æ³•å°†æ–‡ç« è‡ªåŠ¨åˆ†ç±»</h4>
+	<textarea id="article" cols="300" name="article" type="text" class="form-control" placeholder="è¯·è¾“å…¥æ–‡ç« å†…å®¹" required autofocus ></textarea><br />
+	<button class="btn btn-lg btn-primary btn-block" type="submit">è‡ªåŠ¨åˆ†ç±»</button>
 </form>

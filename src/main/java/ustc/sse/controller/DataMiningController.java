@@ -13,7 +13,10 @@ package ustc.sse.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -29,6 +32,8 @@ import ustc.sse.datamining.algo.ChineseTokenizer;
 import ustc.sse.datamining.algo.DefaultStopWordsHandler;
 import ustc.sse.datamining.algo.MultinomialModelNaiveBayes;
 import ustc.sse.datamining.algo.TrainSampleDataManager;
+import ustc.sse.datamining.algo.kmeans.KMean;
+import ustc.sse.model.Classifer;
 import ustc.sse.rjava.RJavaInterface;
 
 /**
@@ -53,6 +58,12 @@ public class DataMiningController {
 		super();
 	}
 	
+	/**
+	 * 淘宝天池竞赛第一季 数据挖掘算法（数据挖掘+画图）
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping("dataMining")
 	public String dataMining(HttpServletRequest request,HttpServletResponse response){
 		if (!RJavaInterface.getRengine().waitForR()) {
@@ -84,16 +95,29 @@ public class DataMiningController {
 		return "taskDetail";
 	}
 	
+	/**
+	 * 文章自动分类算法输入页面
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping("autoDocumentInput")
 	public String autoDocumentInput(HttpServletRequest request,HttpServletResponse response){
 		return "autoDocumentInput";
 	}
 	
+	/**
+	 * 文章自动分类算法
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
 	@RequestMapping("autoDocument")
 	public String autoDocument(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException{
 		TrainSampleDataManager.process();
-		String article=new String((request.getParameter("article")).getBytes("UTF-8"),"GBK");//"据叙利亚国家电视台报道，针对西方国家即将发动的军事行动，叙利亚总统巴沙尔·阿萨德29日说，威胁发动敌对行动会让叙利亚更加坚持其原则和决定，如果遭受任何侵略，叙利亚将进行自卫。叙利亚安全部门官员29日称，该国军队已为最坏情况做好准备，称“将采取措施保卫国家，以及该以何种方式回应”。";
-		request.setCharacterEncoding("GBK");
+		String article=new String((request.getParameter("article")).getBytes("ISO-8859-1"),"UTF-8");
+		//"据叙利亚国家电视台报道，针对西方国家即将发动的军事行动，叙利亚总统巴沙尔·阿萨德29日说，威胁发动敌对行动会让叙利亚更加坚持其原则和决定，如果遭受任何侵略，叙利亚将进行自卫。叙利亚安全部门官员29日称，该国军队已为最坏情况做好准备，称“将采取措施保卫国家，以及该以何种方式回应”。";
 		//String s="两名要求匿名的消息人士称，两家公司的谈判已进入后期。另有一名消息人士称，Foursquare也在和其他公司协商投资事宜，而且这家公司未必与微软达成交易。";
 		//String s="习近平来到沈阳机床集团。听说企业连续两年经营规模世界第一、职工75%以上是80后，总书记高兴地同“飞阳”团队年轻人攀谈起来";
 		//String s="微软 盖茨称：作为接班计划委员会的一名成员，我将紧密与其他成员合作，从而挖掘出一名伟大的新任CEO。在新任CEO上任前，我们很幸运能够看到史蒂夫将继续行使其职责。";
@@ -104,9 +128,6 @@ public class DataMiningController {
 		
 		Map<String,BigDecimal> resultMap=MultinomialModelNaiveBayes.classifyResult(DefaultStopWordsHandler.dropStopWords(words));
 		Set<String> set=resultMap.keySet();
-		for(String str: set){
-			log.info("classifer:"+str+"     probability:"+resultMap.get(str));
-		}
 		
 		docClass.put("C000007", "汽车");
 		docClass.put("C000008", "财经");
@@ -119,10 +140,56 @@ public class DataMiningController {
 		docClass.put("C000023", "文化");
 		docClass.put("C000024", "军事");
 		
+		List<Classifer> classifers = new LinkedList<Classifer>();
+		BigDecimal total = new BigDecimal(0);
+		BigDecimal probability = new BigDecimal(0);
+		for(String str: set){
+			probability = resultMap.get(str);
+			total = total.add(probability);
+			log.info("classifer:"+str+"     probability:"+ probability);
+			Classifer classifer = new Classifer(docClass.get(str),probability);
+			classifers.add(classifer);
+		}
+		//转化百分比
+		for (Classifer classifer : classifers) {
+			classifer.setProbability((classifer.getProbability()).divide(total,2, BigDecimal.ROUND_HALF_EVEN));
+		}
+		
+		request.setAttribute("classifers", classifers);
+		
 		String classifyName = docClass.get(MultinomialModelNaiveBayes.getClassifyResultName());
 		request.setAttribute("classifyName", classifyName);
 		log.info("The final result:"+classifyName);
 		return "autoDocument";
+	}
+	
+	/**
+	 * K-Means 聚类分析输入页面
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping("kMeansInput")
+	public String kMeansInput(HttpServletRequest request,HttpServletResponse response){
+		return "kMeansInput";
+	}
+	
+	/**
+	 * K-Means 聚类分析
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
+	@RequestMapping("kMeans")
+	public String kMeans(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException{
+		String [] args = new String [4];
+		args[0] = "-k";
+		args[1] = request.getParameter("k");
+		args[2] = "-n";
+		args[3] = request.getParameter("numOfNode");
+		KMean.kmeans(args);
+		return "kMeans";
 	}
 
 }

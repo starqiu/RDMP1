@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<ul class="list-unstyled">
+<ul class="list-unstyled nav nav-list">
 	<li class="nav-header"><a href="#" data-toggle="collapse"
 		data-target="#userMenu">
 		<h5>用户管理 <i class="glyphicon glyphicon-chevron-right"></i></h5> </a>
@@ -17,7 +17,7 @@
 	</li>
 	<li class="nav-header"><a href="#" data-toggle="collapse"
 		data-target="#taskMenu">
-		<h5>数据挖掘任务管理 <i class="glyphicon glyphicon-chevron-right"></i></h5> </a>
+		<h5>关联规则任务管理 <i class="glyphicon glyphicon-chevron-right"></i></h5> </a>
 		<ul class="list-unstyled collapse in" id="taskMenu">
 			<li><a href="addTaskLink"><i class="glyphicon glyphicon-plus"></i> 
 					新增任务</a></li>
@@ -34,7 +34,9 @@
 		<h5>更多数据挖掘功能 <i class="glyphicon glyphicon-chevron-right"></i></h5> </a>
 		<ul class="list-unstyled collapse in" id="moreMenu">
 			<li><a href="autoDocumentInput"><i class="glyphicon glyphicon-book"></i> 
-					文章分类</a></li>
+					分类算法</a></li>
+			<li><a href="kMeansInput"><i class="glyphicon glyphicon-resize-small"></i> 
+					聚类算法</a></li>
 		</ul>
 	</li>
 </ul>
