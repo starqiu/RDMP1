@@ -1,0 +1,76 @@
+/**
+ * Function :This is a common function,used to load data from config.xml
+ * 
+ * Created By: Remon Zhang
+ * Created On: 05 Mar 2007
+ *
+ * Amendment History:
+ * 
+ * Amended By       Amended On      Amendment Description
+ * ------------     -----------     ---------------------------------------------
+ * Jason Yang		2007-06-22		Add method getPageSize
+ * 
+ */
+
+package com.dbs.sg.DTE12.common;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.dbs.sg.DTE12.datamapingconfig.batch;
+import com.dbs.sg.DTE12.datamapingconfig.batchs;
+import com.dbs.sg.DTE12.datamapingconfig.batchsFactory;
+
+/**
+ * 
+ */
+public class DataMappingConfig 
+{
+	public static final String CONFIG_FILE_NAME = "datamapingconfig.xml";
+	public static final String file_separator = System.getProperty("file.separator");
+	private batchsFactory iBatchsFactory;
+	private batchs iBatchs;
+	
+	private static Map configs = java.util.Collections.synchronizedMap(new HashMap());
+	
+	public static DataMappingConfig getConfig(String configPath){
+		if (configs.containsKey(configPath)){
+			return (DataMappingConfig)configs.get(configPath);
+		} else {
+			DataMappingConfig config = new DataMappingConfig(configPath);
+			configs.put(configPath, config);
+			return config;
+		}
+	}
+	/**
+	 * Logger
+	 */
+//	private static Logger logger;
+			
+	public DataMappingConfig(String configPath)
+	{
+		iBatchsFactory = new batchsFactory();
+		iBatchsFactory.setPackageName("com.dbs.sg.DTE12.datamapingconfig");
+
+		// Load the document
+		iBatchs = (batchs) iBatchsFactory.loadDocument(configPath + file_separator + CONFIG_FILE_NAME);
+	}
+	
+	public batch getBatch(String batchId)
+	{
+		if (batchId == "" || batchId == null)
+		{
+			return null;
+		}
+
+		for(int i=0;i<iBatchs.getbatchCount();i++)
+		{
+			batch b = iBatchs.getBatch(i);
+			if(batchId.equalsIgnoreCase(b.getName()))
+			{
+				return b;
+			}
+		}
+		return null;
+	}
+}

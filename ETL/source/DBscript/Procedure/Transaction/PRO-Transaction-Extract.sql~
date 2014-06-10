@@ -1,0 +1,9 @@
+DELIMITER //
+CREATE PROCEDURE PRO-Transaction-Extra()
+BEGIN
+  insert into WRK_tmail_firstseason
+  select * from TEMP_tmail_firstseason
+  where visit_datetime > '2013-06-01';
+END
+//
+DELIMITER;

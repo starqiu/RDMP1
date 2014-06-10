@@ -1,0 +1,305 @@
+package com.dbs.sg.DTE12.common;
+
+import java.io.File;
+
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+
+public class AESManager {
+	/**
+	 * Logger
+	 */
+	private static Logger logger;
+	
+	public AESManager(String configPath) {
+		logger = Logger.getLogger(configPath, AESManager.class);
+	}
+
+	public AESManager() {
+	}
+	
+	public void KeyGenerate(String dest) {
+		// Make a new key and write it into file
+		String key_filename = dest;
+		try {
+			KeyGenerator kgen = KeyGenerator.getInstance("AES");
+			kgen.init(128);
+			SecretKey skey = kgen.generateKey();
+			byte[] raw = skey.getEncoded();
+			FileOperator.Write(key_filename, toHexString(raw).getBytes(),false);
+		} catch (Exception e) {
+			error("make key fail!");
+		}
+		debug("make key successfully!");
+	}
+
+	private void error(String msg){
+		if (logger == null)
+			System.out.println(msg);
+		else
+			logger.error(msg);
+	}
+	private void error(String msg, Exception e){
+		if (logger == null)
+			e.printStackTrace();
+		else
+			logger.error(msg, e);
+	}
+	private void debug(String msg){
+		if (logger == null)
+			System.out.println(msg);
+		else
+			logger.debug(msg);
+	}
+	public void Encrypt(String keySource,String password,String passDest ) {	
+		
+		String message = password;
+		String key_filename = keySource;
+		String encrypted_filename = passDest;
+		
+		// Judge if the message is existed
+		if (message.length() == 0) {
+			error("no orignal message!");
+			return;
+		}
+		
+		// Judge if the keyfile is existed
+		File filetemp = null;
+		filetemp = new File(key_filename);
+		if (filetemp.exists() != true) {
+			error("The key file is not existed!");
+			return;
+		}
+		
+		
+		
+		// Fetch the key bytes and make key object
+		SecretKeySpec key = null;
+		byte[] keybyte = new byte[5000];
+		try {
+			keybyte = FileOperator.Read(key_filename);
+			key = new SecretKeySpec(toByteArray(new String(keybyte)), "AES");
+		} catch (Exception e) {
+			//e.printStackTrace();
+			error("The key file reading is fail!",e);
+			return;
+		}
+		
+		// Doing the encryption
+		try {
+			Cipher cipher = Cipher.getInstance("AES");
+			cipher.init(Cipher.ENCRYPT_MODE, key);
+			byte[] encrypted = cipher.doFinal(message.getBytes());
+			FileOperator.Write(encrypted_filename, toHexString(encrypted).getBytes(),false);
+			debug("encry is ok!");
+		} catch (Exception e) {
+			error("make encrypted file fail",e);
+			return;
+		}
+	}
+	
+	
+	public void Descrypt(String key_filename, String encrypted_filename,
+			String decrypted_filename) {
+		
+		// Judge if the key and encrypted file is existed
+		File filetemp = null;
+		filetemp = new File(key_filename);
+		if (filetemp.exists() != true) {
+			error("The key file is not existed!");
+			return;
+		}
+		filetemp = new File(encrypted_filename);
+		if (filetemp.exists() != true) {
+			error("The encrypted file is not existed!");
+			return;
+		}
+		
+		// Fetch the key and encrypted bytes
+		byte[] key, encrypted = new byte[5000];
+		try {
+			key = FileOperator.Read(key_filename);
+			encrypted = FileOperator.Read(encrypted_filename);
+		} catch (Exception e) {
+			//e.printStackTrace();
+			error("The key or encrypted file reading is fail!",e);
+			return;
+		}
+		
+		// Doing the decryption process
+		try {
+			SecretKeySpec keyspec = new SecretKeySpec(toByteArray(new String(key)), "AES");	
+			Cipher cipher = Cipher.getInstance("AES");
+			cipher.init(Cipher.DECRYPT_MODE, keyspec);
+			byte[] decryptresult_byte = cipher.doFinal(toByteArray(new String(encrypted)));
+			FileOperator.Write(decrypted_filename, decryptresult_byte, false);
+			debug("decry is ok!");
+		} catch (Exception e) {
+			//e.printStackTrace();
+			error("The decrypt process is wrong!",e);
+			return;
+		}
+		
+		// Display some information
+		//System.out.println("The decrypted message is: " + new String(decryptresult_byte));
+		//FileOperator.Write(decrypted_filename, decryptresult_byte);
+		//System.err.println("key is : "+toByteArray(new String(key))+"\n and length is :"+toHexString(key).length());			
+		//byte[] decryptresult_byte = new byte[5000];		
+		//System.out.println(key.length);
+		//System.out.println("the encrypted length is: " + encrypted.length);
+	}	
+	
+	public String Descrypt(String key_filename, String encrypted_filename) {
+		// Reading the config from config.xml
+		// Get the keysouce and encrypted 
+		// Call the public void Decrypt(String key_filename, String encrypted_filename,String decrypted_filename) function
+		String password = null;
+		File filetemp = null;
+		filetemp = new File(key_filename);
+		if (filetemp.exists() != true) {
+			error("The key file is not existed!");
+			return null;
+		}
+		filetemp = new File(encrypted_filename);
+		if (filetemp.exists() != true) {
+			error("The encrypted file is not existed!");
+			return null;
+		}
+		
+		// Fetch the key and encrypted bytes
+		byte[] key, encrypted = new byte[5000];
+		try {
+			key = FileOperator.Read(key_filename);
+			encrypted = FileOperator.Read(encrypted_filename);
+		} catch (Exception e) {
+			//e.printStackTrace();
+			error("The key or encrypted file reading is fail!",e);
+			return null;
+		}
+		
+		// Doing the decryption process
+		try {
+			SecretKeySpec keyspec = new SecretKeySpec(toByteArray(new String(key)), "AES");	
+			Cipher cipher = Cipher.getInstance("AES");
+			cipher.init(Cipher.DECRYPT_MODE, keyspec);
+			byte[] decryptresult_byte = cipher.doFinal(toByteArray(new String(encrypted)));
+			password = new String(decryptresult_byte);
+			debug("decry is ok!");
+		} catch (Exception e) {
+			//e.printStackTrace();
+			error("The decrypt process is wrong!",e);
+			return null;
+		}
+		return password;
+	}
+	
+    public String toHexString(byte[] aByteArray) throws Exception{
+        StringBuffer result = new StringBuffer();
+        String tempHexString;
+        int tempInt;
+
+        for (int i = 0; i < aByteArray.length; i++) {
+            tempInt = aByteArray[i];
+            if (tempInt < 0)
+                tempInt = tempInt + 256; // convert a byte to its unsigned value
+            tempHexString = Integer.toHexString(tempInt).toUpperCase();
+
+            // add the leading "0"
+            if (tempHexString.length() == 1)
+            {
+                tempHexString = "0" + tempHexString;
+            }
+
+            result.append(tempHexString);
+        }
+
+        return result.toString();
+    }
+    
+    public byte[] toByteArray(String aHexString) throws Exception {
+        int length = aHexString.length();
+        byte[] result = new byte[length / 2]; // two characters present one byte
+        int y = 0;
+
+        for (int i = 0; i < length; i+=2) {
+            String tempString;
+            if (i + 2 > length) 
+            {
+                tempString = aHexString.substring(i);
+            }
+            else
+            {
+                tempString = aHexString.substring(i, i + 2);
+            }
+
+            result[y++] = (Integer.valueOf(tempString, 16)).byteValue();
+        }
+
+        return result;
+    }
+    
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		String password, keySource, passDest, decrypted_filename;
+		AESManager encryption = new AESManager();
+		
+		String sample = "Sample:\n" +
+				        "1. Generate New Key\n" +
+				        "   java -jar AESManager.jar -k [dest]\n" + 
+				        "2. Encryption\n" +
+						"   java -jar AESManager.jar -e [keySource] [password] [passDest]\n"; 
+		
+		try {
+			if (args[0].equals("-e") && args.length == 4) {
+				keySource = args[1];
+				password = args[2];
+				passDest  = args[3];
+				encryption.Encrypt(keySource, password, passDest);		
+			} else if (args[0].equals("-d") && args.length == 4) {
+				keySource = args[1];
+				passDest = args[2];
+				decrypted_filename = args[3];
+				encryption.Descrypt(keySource, passDest, decrypted_filename);
+			} else if (args[0].equals("-k") && args.length == 2) {
+				keySource = args[1];
+				encryption.KeyGenerate(keySource);
+			} else {
+				System.out.println("arguments wrong");
+				System.out.println(sample);
+			}
+		} catch(Exception e) {
+			System.out.println("arguments wrong");
+			System.out.println(sample);
+			return;
+		}
+		
+		/*
+		password = "c:\\a\\messageasdfasdsa.txt";
+		keySource = "c:\\a\\key.txt";
+		passDest = "c:\\a\\encry.txt";
+		decrypted_filename = "c:\\a\\decry.txt";
+		
+		encryption.KeyGenerate(keySource);
+
+		try {
+			for (int i =0; i<100; i++)
+			{
+				encryption.Encrypt(keySource, password, passDest);		
+				
+				encryption.Descrypt(keySource, passDest, decrypted_filename);
+				
+				System.out.println("****************************");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+		*/
+	}
+
+}

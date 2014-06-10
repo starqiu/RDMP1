@@ -1,0 +1,152 @@
+package com.dbs.sg.DTE12.config;
+
+import com.ibm.etools.xmlschema.beans.Factory;
+
+/**
+* Provides convenience methods for creating Java beans for elements
+* in this XML document
+*/
+public class gcsFactory extends Factory
+{
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7050855697562973018L;
+
+public gcsFactory()
+  {
+    super();
+  }
+  
+  /**
+  * Create the Java bean gcs for the root element
+  *   @param rootElementname The tag for the root element
+  *   @return gcs The Java bean representing this element
+  */
+  public gcs createRoot(String rootElementname)
+  {
+    return (gcs) createRootDOMFromComplexType("gcs",rootElementname);
+  }
+  
+  /**
+  * Create the Java bean gcs by loading the XML file
+  *   @param filename The XML file name
+  *   @return gcs The Java bean representing the root element
+  */
+  public gcs loadDocument(String filename)
+  {
+    return (gcs) loadDocument("gcs",filename);
+  }
+  
+  /**
+  * Create the Java bean gcs for the element
+  *   @param elementName The tag for the element
+  *   @return gcs The Java bean representing this element
+  */
+  public gcs creategcs(String elementName)
+  {
+    return (gcs) createDOMElementFromComplexType("gcs",elementName);
+  }
+  
+  /**
+  * Create the Java bean Entry for the element
+  *   @param elementName The tag for the element
+  *   @return Entry The Java bean representing this element
+  */
+  public Entry createEntry(String elementName)
+  {
+    return (Entry) createDOMElementFromComplexType("Entry",elementName);
+  }
+  
+  /**
+  * Create the Java bean DBConnection for the element
+  *   @param elementName The tag for the element
+  *   @return DBConnection The Java bean representing this element
+  */
+  public DBConnection createDBConnection(String elementName)
+  {
+    return (DBConnection) createDOMElementFromComplexType("DBConnection",elementName);
+  }
+  
+  /**
+  * Create the Java bean Common for the element
+  *   @param elementName The tag for the element
+  *   @return Common The Java bean representing this element
+  */
+  public Common createCommon(String elementName)
+  {
+    return (Common) createDOMElementFromComplexType("Common",elementName);
+  }
+  
+  /**
+  * Create the Java bean Batchlist.batch for the element
+  *   @param elementName The tag for the element
+  *   @return Batchlist.batch The Java bean representing this element
+  */
+  public Batchlist.batch createBatchlist_batch(String elementName)
+  {
+    return (Batchlist.batch) createDOMElementFromComplexType("Batchlist$batch",elementName);
+  }
+  
+  /**
+  * Create the Java bean Batchlist for the element
+  *   @param elementName The tag for the element
+  *   @return Batchlist The Java bean representing this element
+  */
+  public Batchlist createBatchlist(String elementName)
+  {
+    return (Batchlist) createDOMElementFromComplexType("Batchlist",elementName);
+  }
+  
+  /**
+  * Create the Java bean InputFileList.file for the element
+  *   @param elementName The tag for the element
+  *   @return InputFileList.file The Java bean representing this element
+  */
+  public InputFileList.file createInputFileList_file(String elementName)
+  {
+    return (InputFileList.file) createDOMElementFromComplexType("InputFileList$file",elementName);
+  }
+  
+  /**
+  * Create the Java bean InputFileList for the element
+  *   @param elementName The tag for the element
+  *   @return InputFileList The Java bean representing this element
+  */
+  public InputFileList createInputFileList(String elementName)
+  {
+    return (InputFileList) createDOMElementFromComplexType("InputFileList",elementName);
+  }
+  
+  /**
+  * Create the Java bean OutputXMLFileList.file for the element
+  *   @param elementName The tag for the element
+  *   @return OutputXMLFileList.file The Java bean representing this element
+  */
+  public OutputXMLFileList.file createOutputXMLFileList_file(String elementName)
+  {
+    return (OutputXMLFileList.file) createDOMElementFromComplexType("OutputXMLFileList$file",elementName);
+  }
+  
+  /**
+  * Create the Java bean OutputXMLFileList for the element
+  *   @param elementName The tag for the element
+  *   @return OutputXMLFileList The Java bean representing this element
+  */
+  public OutputXMLFileList createOutputXMLFileList(String elementName)
+  {
+    return (OutputXMLFileList) createDOMElementFromComplexType("OutputXMLFileList",elementName);
+  }
+  
+  /**
+  * Create the Java bean TableList for the element
+  *   @param elementName The tag for the element
+  *   @return TableList The Java bean representing this element
+  */
+  public TableList createTableList(String elementName)
+  {
+    return (TableList) createDOMElementFromComplexType("TableList",elementName);
+  }
+  
+}
+

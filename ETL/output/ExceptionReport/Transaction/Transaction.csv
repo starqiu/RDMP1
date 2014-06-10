@@ -1,0 +1,9 @@
+Exception Report for Taobao
+system,app             ,key1,key2,time                           ,error_code               ,error_desc                    
+Taobao,Transaction,1191,,2014-04-23 21:53:28,ERROR_CODE_001,Visit time is illegal.
+Taobao,Transaction,2491,,2014-04-23 21:53:28,ERROR_CODE_001,Visit time is illegal.
+Taobao,Transaction,3561,,2014-04-23 21:53:28,ERROR_CODE_001,Visit time is illegal.
+Taobao,Transaction,31,,2014-04-23 21:53:28,ERROR_CODE_002,Type is not illegal.
+Taobao,Transaction,91191,,2014-04-23 21:53:28,ERROR_CODE_002,Type time is illegal.
+Taobao,Transaction,891,,2014-04-23 21:53:28,ERROR_CODE_002,Visit time is illegal.
+Taobao,Transaction,51,,2014-04-23 21:53:28,ERROR_CODE_001,Visit time is illegal.

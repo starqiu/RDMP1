@@ -1,0 +1,65 @@
+package com.dbs.sg.DTE12.config;
+
+import com.ibm.etools.xmlschema.beans.ComplexType;
+
+/**
+* This class represents the complex type <Entry>
+*/
+public class Entry extends ComplexType
+{
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3729288864587781970L;
+
+public Entry()
+  {
+  }
+  
+  public void setBatchlist(Batchlist batchlist)
+  {
+    setElementValue("batchlist", batchlist);
+  }
+  
+  public Batchlist getBatchlist()
+  {
+    return (Batchlist) getElementValue("batchlist", "Batchlist");
+  }
+  
+  public boolean removeBatchlist()
+  {
+    return removeElement("batchlist");
+  }
+  
+  public void setDbConnection(DBConnection dbConnection)
+  {
+    setElementValue("dbConnection", dbConnection);
+  }
+  
+  public DBConnection getDbConnection()
+  {
+    return (DBConnection) getElementValue("dbConnection", "DBConnection");
+  }
+  
+  public boolean removeDbConnection()
+  {
+    return removeElement("dbConnection");
+  }
+  
+  public void setCommon(Common common)
+  {
+    setElementValue("common", common);
+  }
+  
+  public Common getCommon()
+  {
+    return (Common) getElementValue("common", "Common");
+  }
+  
+  public boolean removeCommon()
+  {
+    return removeElement("common");
+  }
+  
+}
+

@@ -1,0 +1,40 @@
+package com.dbs.sg.DTE12.config;
+
+import com.ibm.etools.xmlschema.beans.ComplexType;
+
+/**
+* This class represents the complex type <TableList>
+*/
+public class TableList extends ComplexType
+{
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3909687318115159348L;
+
+public TableList()
+  {
+  }
+  
+  public void setTableName(int index, String tableName)
+  {
+    setElementValue(index, "tableName", tableName);
+  }
+  
+  public String getTableName(int index)
+  {
+    return getElementValue("tableName", index);
+  }
+  
+  public int getTableNameCount()
+  {
+    return sizeOfElement("tableName");
+  }
+  
+  public boolean removeTableName(int index)
+  {
+    return removeElement(index, "tableName");
+  }
+  
+}
+

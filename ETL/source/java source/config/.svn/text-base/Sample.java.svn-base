@@ -1,0 +1,446 @@
+package com.dbs.sg.DTE12.config;
+
+/**
+* A sample program to show how to use the generated Java beans to:
+*  - create and save an XML document
+*  - load the XML document and print its content
+*/
+public class Sample
+{
+  gcsFactory iGcsFactory;
+  gcs iGcs;
+  
+  public Sample()
+  {
+  }
+  
+  /**
+  * Create the root element in the document
+  */
+  void creategcs()
+  {
+    iGcs.setBatchlist(createBatchlist("batchlist"));
+    iGcs.setDbConnection(createDBConnection("dbConnection"));
+    iGcs.setCommon(createCommon("common"));
+  }
+  
+  /**
+  * Print the content of the root element
+  */
+  void printgcs()
+  {
+    printBatchlist(iGcs.getBatchlist());
+    printDBConnection(iGcs.getDbConnection());
+    printCommon(iGcs.getCommon());
+  }
+  
+  /**
+  * Create the Java bean Entry
+  *   @param name The element tag name
+  *   @return Entry The Java bean for this element
+  */
+  Entry createEntry(String name)
+  {
+    Entry iEntry = iGcsFactory.createEntry(name);
+    
+    return initEntry(iEntry);
+  }
+  
+  /**
+  * Set the children (element or attribute) values in the element that is 
+  * represented by the Java bean
+  *   @param Entry The Java bean
+  *   @return Entry The Java bean
+  */
+  Entry initEntry(Entry iEntry)
+  {
+    iEntry.setBatchlist(createBatchlist("batchlist"));
+    iEntry.setDbConnection(createDBConnection("dbConnection"));
+    iEntry.setCommon(createCommon("common"));
+    
+    return iEntry;
+  }
+  
+  /**
+  * Print the element represented by the Java bean Entry
+  */
+  void printEntry(Entry iEntry)
+  {
+    printBatchlist(iEntry.getBatchlist());
+    printDBConnection(iEntry.getDbConnection());
+    printCommon(iEntry.getCommon());
+  }
+  
+  /**
+  * Create the Java bean DBConnection
+  *   @param name The element tag name
+  *   @return DBConnection The Java bean for this element
+  */
+  DBConnection createDBConnection(String name)
+  {
+    DBConnection iDBConnection = iGcsFactory.createDBConnection(name);
+    
+    return initDBConnection(iDBConnection);
+  }
+  
+  /**
+  * Set the children (element or attribute) values in the element that is 
+  * represented by the Java bean
+  *   @param DBConnection The Java bean
+  *   @return DBConnection The Java bean
+  */
+  DBConnection initDBConnection(DBConnection iDBConnection)
+  {
+    iDBConnection.setConnectionstring("connectionstring");
+    iDBConnection.setUserid("userid");
+    iDBConnection.setPasswordurl("passwordurl");
+    iDBConnection.setDBName("DBName");
+    
+    return iDBConnection;
+  }
+  
+  /**
+  * Print the element represented by the Java bean DBConnection
+  */
+  void printDBConnection(DBConnection iDBConnection)
+  {
+    System.out.println(iDBConnection.getConnectionstring());
+    System.out.println(iDBConnection.getUserid());
+    System.out.println(iDBConnection.getPasswordurl());
+    System.out.println(iDBConnection.getDBName());
+  }
+  
+  /**
+  * Create the Java bean Common
+  *   @param name The element tag name
+  *   @return Common The Java bean for this element
+  */
+  Common createCommon(String name)
+  {
+    Common iCommon = iGcsFactory.createCommon(name);
+    
+    return initCommon(iCommon);
+  }
+  
+  /**
+  * Set the children (element or attribute) values in the element that is 
+  * represented by the Java bean
+  *   @param Common The Java bean
+  *   @return Common The Java bean
+  */
+  Common initCommon(Common iCommon)
+  {
+    iCommon.setJavaLogFile("javaLogFile");
+    iCommon.setKeyFile("keyFile");
+    iCommon.setEncryptFile("encryptFile");
+    iCommon.setXMLSchemal("XMLSchemal");
+    iCommon.setBasePath("basePath");
+    
+    return iCommon;
+  }
+  
+  /**
+  * Print the element represented by the Java bean Common
+  */
+  void printCommon(Common iCommon)
+  {
+    System.out.println(iCommon.getJavaLogFile());
+    System.out.println(iCommon.getKeyFile());
+    System.out.println(iCommon.getEncryptFile());
+    System.out.println(iCommon.getXMLSchemal());
+    System.out.println(iCommon.getBasePath());
+  }
+  
+  /**
+  * Create the Java bean Batchlist
+  *   @param name The element tag name
+  *   @return Batchlist The Java bean for this element
+  */
+  Batchlist createBatchlist(String name)
+  {
+    Batchlist iBatchlist = iGcsFactory.createBatchlist(name);
+    
+    return initBatchlist(iBatchlist);
+  }
+  
+  /**
+  * Set the children (element or attribute) values in the element that is 
+  * represented by the Java bean
+  *   @param Batchlist The Java bean
+  *   @return Batchlist The Java bean
+  */
+  Batchlist initBatchlist(Batchlist iBatchlist)
+  {
+    iBatchlist.setBatch(0,createBatchlist_batch("batch"));
+    
+    return iBatchlist;
+  }
+  
+  /**
+  * Print the element represented by the Java bean Batchlist
+  */
+  void printBatchlist(Batchlist iBatchlist)
+  {
+    printBatchlist_batch(iBatchlist.getBatch(0));
+  }
+  
+  /**
+  * Create the Java bean Batchlist.batch
+  *   @param name The element tag name
+  *   @return Batchlist.batch The Java bean for this element
+  */
+  Batchlist.batch createBatchlist_batch(String name)
+  {
+    Batchlist.batch iBatch = iGcsFactory.createBatchlist_batch(name);
+    
+    return initbatch(iBatch);
+  }
+  
+  /**
+  * Set the children (element or attribute) values in the element that is 
+  * represented by the Java bean
+  *   @param Batchlist.batch The Java bean
+  *   @return Batchlist.batch The Java bean
+  */
+  Batchlist.batch initbatch(Batchlist.batch iBatch)
+  {
+    iBatch.setId("id");
+    iBatch.setOutputXmlFileList(createOutputXMLFileList("outputXmlFileList"));
+    iBatch.setInputFileList(createInputFileList("inputFileList"));
+    iBatch.setTableList(createTableList("tableList"));
+    
+    return iBatch;
+  }
+  
+  /**
+  * Print the element represented by the Java bean Batchlist.batch
+  */
+  void printBatchlist_batch(Batchlist.batch iBatch)
+  {
+    System.out.println(iBatch.getId());
+    printOutputXMLFileList(iBatch.getOutputXmlFileList());
+    printInputFileList(iBatch.getInputFileList());
+    printTableList(iBatch.getTableList());
+  }
+  
+  /**
+  * Create the Java bean InputFileList
+  *   @param name The element tag name
+  *   @return InputFileList The Java bean for this element
+  */
+  InputFileList createInputFileList(String name)
+  {
+    InputFileList iInputFileList = iGcsFactory.createInputFileList(name);
+    
+    return initInputFileList(iInputFileList);
+  }
+  
+  /**
+  * Set the children (element or attribute) values in the element that is 
+  * represented by the Java bean
+  *   @param InputFileList The Java bean
+  *   @return InputFileList The Java bean
+  */
+  InputFileList initInputFileList(InputFileList iInputFileList)
+  {
+    iInputFileList.setFile(0,createInputFileList_file("file"));
+    
+    return iInputFileList;
+  }
+  
+  /**
+  * Print the element represented by the Java bean InputFileList
+  */
+  void printInputFileList(InputFileList iInputFileList)
+  {
+    printInputFileList_file(iInputFileList.getFile(0));
+  }
+  
+  /**
+  * Create the Java bean InputFileList.file
+  *   @param name The element tag name
+  *   @return InputFileList.file The Java bean for this element
+  */
+  InputFileList.file createInputFileList_file(String name)
+  {
+    InputFileList.file iFile = iGcsFactory.createInputFileList_file(name);
+    
+    return initfile(iFile);
+  }
+  
+  /**
+  * Set the children (element or attribute) values in the element that is 
+  * represented by the Java bean
+  *   @param InputFileList.file The Java bean
+  *   @return InputFileList.file The Java bean
+  */
+  InputFileList.file initfile(InputFileList.file iFile)
+  {
+    iFile.setFileName("fileName");
+    
+    return iFile;
+  }
+  
+  /**
+  * Print the element represented by the Java bean InputFileList.file
+  */
+  void printInputFileList_file(InputFileList.file iFile)
+  {
+    System.out.println(iFile.getFileName());
+  }
+  
+  /**
+  * Create the Java bean OutputXMLFileList
+  *   @param name The element tag name
+  *   @return OutputXMLFileList The Java bean for this element
+  */
+  OutputXMLFileList createOutputXMLFileList(String name)
+  {
+    OutputXMLFileList iOutputXMLFileList = iGcsFactory.createOutputXMLFileList(name);
+    
+    return initOutputXMLFileList(iOutputXMLFileList);
+  }
+  
+  /**
+  * Set the children (element or attribute) values in the element that is 
+  * represented by the Java bean
+  *   @param OutputXMLFileList The Java bean
+  *   @return OutputXMLFileList The Java bean
+  */
+  OutputXMLFileList initOutputXMLFileList(OutputXMLFileList iOutputXMLFileList)
+  {
+    iOutputXMLFileList.setFile(0,createOutputXMLFileList_file("file"));
+    
+    return iOutputXMLFileList;
+  }
+  
+  /**
+  * Print the element represented by the Java bean OutputXMLFileList
+  */
+  void printOutputXMLFileList(OutputXMLFileList iOutputXMLFileList)
+  {
+    printOutputXMLFileList_file(iOutputXMLFileList.getFile(0));
+  }
+  
+  /**
+  * Create the Java bean OutputXMLFileList.file
+  *   @param name The element tag name
+  *   @return OutputXMLFileList.file The Java bean for this element
+  */
+  OutputXMLFileList.file createOutputXMLFileList_file(String name)
+  {
+    OutputXMLFileList.file iFile = iGcsFactory.createOutputXMLFileList_file(name);
+    
+    return initfile(iFile);
+  }
+  
+  /**
+  * Set the children (element or attribute) values in the element that is 
+  * represented by the Java bean
+  *   @param OutputXMLFileList.file The Java bean
+  *   @return OutputXMLFileList.file The Java bean
+  */
+  OutputXMLFileList.file initfile(OutputXMLFileList.file iFile)
+  {
+    iFile.setFileName("fileName");
+    iFile.setType("type");
+    iFile.setVersionNO("versionNO");
+    
+    return iFile;
+  }
+  
+  /**
+  * Print the element represented by the Java bean OutputXMLFileList.file
+  */
+  void printOutputXMLFileList_file(OutputXMLFileList.file iFile)
+  {
+    System.out.println(iFile.getFileName());
+    System.out.println(iFile.getType());
+    System.out.println(iFile.getVersionNO());
+  }
+  
+  /**
+  * Create the Java bean TableList
+  *   @param name The element tag name
+  *   @return TableList The Java bean for this element
+  */
+  TableList createTableList(String name)
+  {
+    TableList iTableList = iGcsFactory.createTableList(name);
+    
+    return initTableList(iTableList);
+  }
+  
+  /**
+  * Set the children (element or attribute) values in the element that is 
+  * represented by the Java bean
+  *   @param TableList The Java bean
+  *   @return TableList The Java bean
+  */
+  TableList initTableList(TableList iTableList)
+  {
+    iTableList.setTableName(0,"tableName");
+    
+    return iTableList;
+  }
+  
+  /**
+  * Print the element represented by the Java bean TableList
+  */
+  void printTableList(TableList iTableList)
+  {
+    System.out.println(iTableList.getTableName(0));
+  }
+  
+  /**
+  * Create a new XML document using the generated gcsFactory class
+  *   @param filename The XML file name
+  */
+  void createNewInstance(String filename)
+  {
+    iGcsFactory = new gcsFactory();
+    iGcsFactory.setPackageName("com.dbs.DTE12.config");
+    
+    // include schemaLocation hint for validation
+    iGcsFactory.setXSDFileName("config.xsd");
+    iGcsFactory.setNamespaceURI("http://www.ibm.com");
+    
+    // encoding for output document
+    iGcsFactory.setEncoding("UTF8");
+    
+    // encoding tag for xml declaration
+    iGcsFactory.setEncodingTag("UTF-8");
+    
+    // Create the root element in the document using the specified root element name
+    iGcs = (gcs) iGcsFactory.createRoot("config:gcs");
+    creategcs();
+    
+    iGcsFactory.save(filename);
+  }
+  
+  /**
+  * Load an XML document using the generated gcsFactory class
+  *   @param filename An existing XML file name
+  */
+  void loadExistingInstance(String filename)
+  {
+    iGcsFactory = new gcsFactory();
+    iGcsFactory.setPackageName("com.dbs.DTE12.config");
+    
+    // Load the document
+    iGcs = (gcs) iGcsFactory.loadDocument(filename);
+    printgcs();
+  }
+  
+  /**
+  * The main program.
+  * Creates an example XML document and then loads it
+  */
+  public static void main(String args[])
+  {
+    Sample sample = new Sample();
+    sample.createNewInstance("C:/work/DTE12/source/java/configSample.xml");
+    sample.loadExistingInstance("C:/work/DTE12/source/java/configSample.xml");
+  }
+}
+

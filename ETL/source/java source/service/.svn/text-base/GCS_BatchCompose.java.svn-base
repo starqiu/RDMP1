@@ -1,0 +1,184 @@
+package com.dbs.sg.DTE12.service;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
+import com.dbs.sg.DTE12.common.DataMappingConfig;
+import com.dbs.sg.DTE12.common.LoadConfigXml;
+import com.dbs.sg.DTE12.common.Logger;
+import com.dbs.sg.DTE12.datamapingconfig.Field;
+import com.dbs.sg.DTE12.datamapingconfig.batch;
+import com.dbs.sg.DTE12.datamapingconfig.file;
+import com.dbs.sg.DTE12.datamapingconfig.table;
+
+public class GCS_BatchCompose {
+	private String basepath;
+
+	private String batchname;
+
+	private String inputPath;
+
+	private batch batch;
+
+	public static String unknowColName = "unknown";
+
+	/**
+	 * Logger
+	 */
+	private static Logger logger;// Added by Remon 20070320
+
+	public GCS_BatchCompose(String configPath, String batchname) {
+		LoadConfigXml configXml = LoadConfigXml.getConfig(configPath);
+		DataMappingConfig dconfig = DataMappingConfig.getConfig(configPath);
+		this.batchname = batchname;
+		this.basepath = configXml.getBasePath();
+		this.batch = dconfig.getBatch(batchname);
+	}
+
+	public static void main(String[] args) {
+
+		String batchId = null;
+		String configPath = null;
+		if (args.length < 2) {
+			System.out.println("1");
+			return;
+		} else {
+			configPath = args[0];
+			batchId = args[1];
+		}
+		logger = Logger.getLogger(configPath, GCS_BatchCompose.class);
+		GCS_BatchCompose comp = new GCS_BatchCompose(configPath, batchId);
+
+		try {
+			comp.Compose();
+			System.out.println("0");
+		} catch (Exception e) {
+			logger.error("", e);
+			System.out.println("1");
+		}
+	}
+
+	public String getBasepath() {
+		if (this.basepath.endsWith(LoadConfigXml.file_separator))
+			return this.basepath;
+		else
+			return this.basepath + LoadConfigXml.file_separator;
+		// return this.basepath;
+	}
+
+	public String getBatchName() {
+		return this.batchname;
+	}
+
+	public String getInputPath() {
+		return inputPath;
+	}
+
+	public void Compose() throws Exception {
+		logger.info("Compose() - start,batchname=" + this.batchname);
+		if (this.batch == null) {
+			throw new Exception("System does not find the batch!");
+		}
+		this.CreateControlFile();
+	}
+
+	/*
+	 * Create control file for each table being load to Oracle
+	 */
+	private void CreateControlFile() throws Exception {
+		if(batch.getInputfiles()==null) return;
+		for (int i = 0; i < batch.getInputfiles().getfileCount(); i++) {
+			file f = batch.getInputfiles().getFile(i);
+			File fl = new File(this.getBasepath() + f.getControl());
+			String reclength=null;
+			if (fl.exists()) {
+				fl.delete();
+				fl.createNewFile();
+			}
+			PrintWriter out1 = new PrintWriter(new BufferedWriter(
+					new FileWriter(fl)));
+			out1.print("Load Data");
+
+			if("WE8EBCDIC500".equals(f.getCharset())) {
+				out1.println(" CHARACTERSET WE8EBCDIC500");
+				reclength=" \"fix "+f.getReclength()+"\"";
+			}
+			else out1.println("");
+
+			out1.print("INFILE  '" + this.basepath + f.getMap() + "'");
+			if(reclength==null) out1.println();
+			else out1.println(reclength);
+			out1.println("BADFILE '" + this.basepath
+					+ f.getMap().substring(0, f.getMap().lastIndexOf("."))
+					+ ".BAD'");
+			out1.println("DISCARDFILE '" + this.basepath
+					+ f.getMap().substring(0, f.getMap().lastIndexOf("."))
+					+ ".DSC'");
+
+			out1.println("APPEND");
+			for (int k = 0; k < f.getTables().gettableCount(); k++) {
+				table t = f.getTables().getTable(k);
+				out1.println("INTO TABLE " + t.getName());
+
+				if (t.getWhen() != null) {
+					out1.println("WHEN " + t.getWhen().getType() + "='"
+							+ t.getWhen().getValue() + "'");
+					logger.info("using when condition....");
+				}
+
+				if ("host".equals(f.getMapstyle())) {
+					out1.println("(");
+					if(f.getAction() != null && !f.getAction().equals("")){
+						out1.println(f.getFieldName()+" " + "CONSTANT"+" "+f.getFieldValue()+" ,");
+					}
+					for (int j = 0; j < t.getFields().getFieldCount(); j++) {
+						Field fd = t.getFields().getField(j);
+						if (fd.getOffset().toLowerCase().equals("recnum"))
+							out1.print(fd.getName() + " RECNUM");
+						else
+							out1.print(fd.getName()
+											+ " Position("
+											+ (Integer.parseInt(fd.getOffset()) + 1)
+											+ ":"
+											+ (Integer.parseInt(fd.getOffset()) + Integer
+													.parseInt(fd.getLength()))
+											+ ")");
+						if(fd.getType()!=null) out1.print(" "+fd.getType());
+						if (j < t.getFields().getFieldCount() - 1)
+							out1.print(",");
+						out1.println();
+					}
+					out1.println(")");
+				} else {
+					out1.println("Fields terminated by '" + f.getMapstyle()
+							+ "' optionally enclosed by '\"' TRAILING NULLCOLS");
+					out1.println("(");
+					if(f.getAction() != null && !f.getAction().equals("")){
+						out1.println(f.getFieldName()+" " + "CONSTANT"+" "+f.getFieldValue()+" ,");
+					}
+					for (int j = 0; j < t.getFields().getFieldCount(); j++) {
+						Field fd = t.getFields().getField(j);
+						if (fd.getOffset().toLowerCase().equals("recnum"))
+							out1.print(fd.getName() + " RECNUM");
+						else
+						{
+							if (Integer.parseInt(fd.getLength()) < 0)
+								out1.print(unknowColName + (j + 1) + " filler CHAR");
+							else
+								out1.print(fd.getName() + " CHAR " + "\"TRIM(:"
+										+ fd.getName() + ")\"");
+						}
+						if(fd.getType()!=null) out1.print(" "+fd.getType());
+						if (j < t.getFields().getFieldCount() - 1)
+							out1.print(",");
+						out1.println();
+					}
+					out1.println(")");
+				}
+			}
+			out1.close();
+		}
+	}
+}

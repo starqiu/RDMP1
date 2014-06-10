@@ -1,0 +1,21 @@
+
+-- 导出 tmailcontest 的数据库结构
+--drop database `tmailcontest`;
+--CREATE DATABASE IF NOT EXISTS `tmailcontest` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `test`;
+
+
+-- 导出  表 tmailcontest.tmail_firstseason 结构
+/*CREATE TABLE IF NOT EXISTS `tmail_firstseason` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL,
+  `brand_id` bigint(20) NOT NULL,
+  `type` int(11) NOT NULL,
+  `visit_datetime` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=182881 DEFAULT CHARSET=utf8 COMMENT='第一赛季的预测结果格式为：\r\n\r\n用户ID   商品ID\r\n6295680	24773,11923,15559\r\n9060360	21078,1173,9399\r\n4930440	3079,24909\r\n5905320	19736,24773,5477,9605,17606\r\n1954920	9738,15239,3051,2392\r\n763560	11456,18305,1173\r\n8462560	17606,24773,15239';
+
+INSERT INTO `tmail_firstseason` (`id`, `user_id`, `brand_id`, `type`, `visit_datetime`) VALUES
+	(1, 10944750, 13451, 0, '2013-06-04');
+
+exit;*/
